@@ -1,0 +1,51 @@
+.app-sidebar {
+  height: 100vh;
+  background: #001529;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  transition: width 0.2s;
+  width: 200px;
+}
+
+.app-sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar-logo {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  background: #002140;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-menu {
+  background: #001529;
+  border-right: none;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.sidebar-menu .ant-menu-item {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.sidebar-menu .ant-menu-item-selected {
+  background: #1890ff;
+  color: #fff;
+}
+
+.sidebar-menu .ant-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
+

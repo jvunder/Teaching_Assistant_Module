@@ -1,0 +1,27 @@
+.classes-page {
+  padding: 0;
+}
+
+.classes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.classes-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .classes-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+
+

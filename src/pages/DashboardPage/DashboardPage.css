@@ -1,0 +1,42 @@
+.dashboard-page {
+  padding: 0;
+}
+
+.dashboard-title {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.dashboard-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.dashboard-kpis {
+  margin-bottom: 24px;
+}
+
+.dashboard-charts {
+  margin-bottom: 24px;
+}
+
+.chart-card {
+  height: 100%;
+}
+
+.dashboard-activities {
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-kpis .ant-col {
+    margin-bottom: 16px;
+  }
+}
+
+
+

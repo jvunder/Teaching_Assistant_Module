@@ -124,8 +124,8 @@ const AnalyticsPage = () => {
   ];
 
   return (
-    <div className="analytics-page">
-      <div className="analytics-header">
+    <div className="wow-page analytics-page">
+      <div className="wow-header analytics-header">
         <Title level={2}>Phân tích & Báo cáo</Title>
         <Space>
           <RangePicker
@@ -133,17 +133,17 @@ const AnalyticsPage = () => {
             onChange={handleDateRangeChange}
             format="DD/MM/YYYY"
           />
-          <Button icon={<FileExcelOutlined />} onClick={handleExportExcel}>
+          <Button className="wow-btn" icon={<FileExcelOutlined />} onClick={handleExportExcel}>
             Xuất Excel
           </Button>
-          <Button icon={<FilePdfOutlined />} onClick={handleExportPDF}>
+          <Button className="wow-btn" icon={<FilePdfOutlined />} onClick={handleExportPDF}>
             Xuất PDF
           </Button>
         </Space>
       </div>
 
       {/* Engagement Chart */}
-      <Card title="Xu hướng tương tác" style={{ marginBottom: 24 }}>
+      <Card className="wow-card" title="Xu hướng tương tác" style={{ marginBottom: 24 }}>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={analyticsData.engagement}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -165,7 +165,7 @@ const AnalyticsPage = () => {
       {/* Charts Row */}
       <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         <Col xs={24} lg={12}>
-          <Card title="Hiệu suất lớp học">
+          <Card className="wow-card" title="Hiệu suất lớp học">
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={analyticsData.classPerformance}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -179,7 +179,7 @@ const AnalyticsPage = () => {
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card title="Thống kê tin nhắn">
+          <Card className="wow-card" title="Thống kê tin nhắn">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -205,8 +205,9 @@ const AnalyticsPage = () => {
       </Row>
 
       {/* Top Classes Table */}
-      <Card title="Top lớp học">
+      <Card className="wow-card" title="Top lớp học">
         <Table
+          className="wow-table"
           columns={topClassesColumns}
           dataSource={analyticsData.topClasses}
           rowKey="name"

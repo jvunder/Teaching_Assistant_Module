@@ -1,0 +1,343 @@
+/**
+ * WOW Design System - Global Styles
+ * Thiết kế đồng nhất cho toàn bộ ứng dụng
+ * Simplified & Professional
+ */
+
+/* ============================================
+   GLOBAL PAGE STYLES - Apply to ALL Pages
+   ============================================ */
+
+/* Base Page Container */
+.wow-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative;
+}
+
+/* Page Header Style */
+.wow-header {
+  text-align: center;
+  margin-bottom: 32px;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.wow-header h1,
+.wow-header h2 {
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.wow-header .subtitle {
+  color: #6c757d;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+/* ============================================
+   CARD STYLES - Glassmorphism Effect
+   ============================================ */
+
+.wow-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+.wow-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2) !important;
+}
+
+/* Stat Cards */
+.wow-stat-card {
+  text-align: center;
+  padding: 24px !important;
+  min-height: 140px;
+  cursor: pointer;
+}
+
+.wow-stat-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.wow-stat-card:hover .wow-stat-icon {
+  transform: scale(1.1);
+}
+
+/* Icon Colors */
+.icon-blue {
+  background: linear-gradient(135deg, #667eea, #4facfe);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.icon-green {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+}
+
+.icon-orange {
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.icon-teal {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+}
+
+.icon-purple {
+  background: linear-gradient(135deg, #764ba2, #f093fb);
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+}
+
+/* Stat Value */
+.wow-stat-value {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2 !important;
+}
+
+/* Stat Label */
+.wow-stat-label {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.wow-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 10px 24px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.wow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3) !important;
+}
+
+.wow-btn-secondary {
+  background: white !important;
+  border: 2px solid #e0e0e0 !important;
+  color: #667eea !important;
+}
+
+.wow-btn-secondary:hover {
+  border-color: #667eea !important;
+  background: rgba(102, 126, 234, 0.05) !important;
+}
+
+/* ============================================
+   TABLE STYLES
+   ============================================ */
+
+.wow-table {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.wow-table thead {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+}
+
+.wow-table thead th {
+  color: white !important;
+  font-weight: 600 !important;
+  border: none !important;
+  padding: 16px !important;
+}
+
+.wow-table tbody tr:hover {
+  background: rgba(102, 126, 234, 0.05) !important;
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+
+.wow-input {
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  transition: all 0.3s ease !important;
+}
+
+.wow-input:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.wow-label {
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 8px;
+}
+
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+
+.wow-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.wow-section-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   LIST STYLES
+   ============================================ */
+
+.wow-list-item {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.wow-list-item:hover {
+  background: rgba(102, 126, 234, 0.05);
+  padding-left: 24px;
+}
+
+.wow-list-item:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
+   ANIMATIONS - Simplified
+   ============================================ */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply entrance animations */
+.wow-animate-card {
+  animation: fadeInUp 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.wow-animate-card:nth-child(1) { animation-delay: 0.1s; }
+.wow-animate-card:nth-child(2) { animation-delay: 0.2s; }
+.wow-animate-card:nth-child(3) { animation-delay: 0.3s; }
+.wow-animate-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .wow-page {
+    padding: 16px;
+  }
+
+  .wow-header h1,
+  .wow-header h2 {
+    font-size: 28px;
+  }
+
+  .wow-stat-value {
+    font-size: 24px !important;
+  }
+
+  .wow-section {
+    padding: 16px;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-gradient {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.shadow-soft {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.rounded-lg {
+  border-radius: 16px;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}

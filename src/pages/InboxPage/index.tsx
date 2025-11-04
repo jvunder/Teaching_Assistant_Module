@@ -221,12 +221,12 @@ const InboxPage = () => {
   ];
 
   return (
-    <div className="inbox-page">
-      <div className="inbox-header">
+    <div className="wow-page inbox-page">
+      <div className="wow-header inbox-header">
         <Title level={2}>Hộp thư hỗ trợ</Title>
       </div>
 
-      <Card>
+      <Card className="wow-card">
         <Tabs activeKey={activeTab} onChange={setActiveTab}>
           <TabPane
             tab={
@@ -262,6 +262,7 @@ const InboxPage = () => {
         </Tabs>
 
         <Table
+          className="wow-table"
           columns={columns}
           dataSource={tickets}
           rowKey="id"
@@ -286,7 +287,7 @@ const InboxPage = () => {
           <Button key="transfer" onClick={handleTransferToAdmin}>
             Chuyển đến admin
           </Button>,
-          <Button key="reply" type="primary" icon={<SendOutlined />} onClick={handleReply}>
+          <Button key="reply" type="primary" className="wow-btn" icon={<SendOutlined />} onClick={handleReply}>
             Phản hồi
           </Button>,
         ]}
@@ -372,7 +373,7 @@ const InboxPage = () => {
 
           <Form.Item>
             <Space>
-              <Button type="primary" htmlType="submit" icon={<SendOutlined />}>
+              <Button type="primary" className="wow-btn" htmlType="submit" icon={<SendOutlined />}>
                 Gửi phản hồi
               </Button>
               <Button onClick={() => setShowReplyModal(false)}>Hủy</Button>

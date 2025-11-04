@@ -9,6 +9,8 @@ import {
 } from '@ant-design/icons';
 import { useAuthStore } from '@/stores/authStore';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import './Header.css';
 
 const { Header: AntHeader } = Layout;
@@ -22,6 +24,7 @@ interface HeaderProps {
 const Header = ({ collapsed, onToggle }: HeaderProps) => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     logout();
@@ -32,13 +35,13 @@ const Header = ({ collapsed, onToggle }: HeaderProps) => {
     items: [
       {
         key: 'profile',
-        label: 'Thông tin cá nhân',
+        label: t('profile.personalInfo'),
         icon: <UserOutlined />,
         onClick: () => navigate('/profile'),
       },
       {
         key: 'settings',
-        label: 'Cài đặt',
+        label: t('profile.settings'),
         icon: <SettingOutlined />,
       },
       {
@@ -46,7 +49,7 @@ const Header = ({ collapsed, onToggle }: HeaderProps) => {
       },
       {
         key: 'logout',
-        label: 'Đăng xuất',
+        label: t('common.logout'),
         icon: <LogoutOutlined />,
         danger: true,
         onClick: handleLogout,
@@ -69,6 +72,9 @@ const Header = ({ collapsed, onToggle }: HeaderProps) => {
 
       <div className="header-right">
         <Space size="large">
+          {/* Language Switcher */}
+          <LanguageSwitcher />
+
           {/* Notifications */}
           <Dropdown
             menu={{

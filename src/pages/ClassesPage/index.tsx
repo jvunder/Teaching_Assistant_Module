@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { Card, Table, Tag, Button, Space, Input, Alert } from 'antd';
 import { EyeOutlined, SearchOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { mockDataService, type MockClass } from '@/services/mockData.service';
 import type { ColumnsType } from 'antd/es/table';
 import './ClassesPage.css';
 
 const ClassesPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [classes, setClasses] = useState<MockClass[]>([]);
   const [searchText, setSearchText] = useState('');
@@ -38,7 +40,7 @@ const ClassesPage = () => {
 
   const columns: ColumnsType<MockClass> = [
     {
-      title: 'Tên lớp',
+      title: t('classes.table.className'),
       dataIndex: 'name',
       key: 'name',
       sorter: (a, b) => a.name.localeCompare(b.name),
@@ -49,7 +51,7 @@ const ClassesPage = () => {
       key: 'grade',
     },
     {
-      title: 'Môn học',
+      title: t('classes.table.subject'),
       dataIndex: 'subject',
       key: 'subject',
       render: (subject: string) => <Tag color="blue">{subject}</Tag>,
@@ -60,7 +62,7 @@ const ClassesPage = () => {
       key: 'teacherName',
     },
     {
-      title: 'Số học sinh',
+      title: t('classes.table.students'),
       dataIndex: 'studentCount',
       key: 'studentCount',
       align: 'center',
@@ -74,7 +76,7 @@ const ClassesPage = () => {
       sorter: (a, b) => a.parentCount - b.parentCount,
     },
     {
-      title: 'Thao tác',
+      title: t('classes.table.actions'),
       key: 'action',
       align: 'center',
       render: (_, record) => (
@@ -83,7 +85,7 @@ const ClassesPage = () => {
           icon={<EyeOutlined />}
           onClick={() => navigate(`/classes/${record.id}`)}
         >
-          Xem chi tiết
+          {t('classes.viewDetails')}
         </Button>
       ),
     },
@@ -94,12 +96,12 @@ const ClassesPage = () => {
   }
 
   return (
-    <div className="classes-page">
-      <div className="classes-header">
-        <h1>Quản lý lớp học</h1>
+    <div className="wow-page">
+      <div className="wow-header">
+        <h1>{t('classes.title')}</h1>
         <Space>
           <Input
-            placeholder="Tìm kiếm lớp học..."
+            placeholder={t('classes.searchPlaceholder')}
             prefix={<SearchOutlined />}
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -109,8 +111,9 @@ const ClassesPage = () => {
         </Space>
       </div>
 
-      <Card>
+      <Card className="wow-card">
         <Table
+          className="wow-table"
           columns={columns}
           dataSource={filteredClasses}
           rowKey="id"
@@ -118,7 +121,7 @@ const ClassesPage = () => {
           pagination={{
             pageSize: 10,
             showSizeChanger: true,
-            showTotal: (total) => `Tổng ${total} lớp học`,
+            showTotal: (total) => t('classes.total', { total }),
           }}
         />
       </Card>

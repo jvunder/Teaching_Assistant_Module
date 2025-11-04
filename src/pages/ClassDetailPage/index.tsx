@@ -239,8 +239,8 @@ const ClassDetailPage = () => {
   }
 
   return (
-    <div className="class-detail-page">
-      <div className="class-detail-header">
+    <div className="wow-page class-detail-page">
+      <div className="wow-header class-detail-header">
         <Button icon={<ArrowLeftOutlined />} onClick={() => navigate('/classes')}>
           Quay lại
         </Button>
@@ -250,49 +250,50 @@ const ClassDetailPage = () => {
       {/* Stats Cards */}
       <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="wow-card">
             <Statistic
               title="Số học sinh"
               value={classData.studentCount}
-              prefix={<UserOutlined />}
+              prefix={<UserOutlined className="icon-blue" />}
             />
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="wow-card">
             <Statistic
               title="Số phụ huynh"
               value={classData.parentCount}
-              prefix={<UserOutlined />}
+              prefix={<UserOutlined className="icon-green" />}
             />
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="wow-card">
             <Statistic
               title="Khối lớp"
               value={classData.grade}
-              prefix={<FileTextOutlined />}
+              prefix={<FileTextOutlined className="icon-orange" />}
             />
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="wow-card">
             <Statistic
               title="Môn học"
               value={classData.subject}
-              prefix={<FileTextOutlined />}
+              prefix={<FileTextOutlined className="icon-teal" />}
             />
           </Card>
         </Col>
       </Row>
 
       {/* Tabs */}
-      <Card>
+      <Card className="wow-card">
         <div style={{ marginBottom: 16 }}>
           <Space>
             <Button
               type="primary"
+              className="wow-btn"
               icon={<MessageOutlined />}
               onClick={handleSendMessage}
             >
@@ -312,6 +313,7 @@ const ClassDetailPage = () => {
               allowClear
             />
             <Table
+              className="wow-table"
               columns={parentColumns}
               dataSource={filteredParents}
               rowKey="id"
@@ -327,6 +329,7 @@ const ClassDetailPage = () => {
 
           <TabPane tab="Tiến độ học tập" key="progress">
             <Table
+              className="wow-table"
               columns={progressColumns}
               dataSource={progress}
               rowKey="studentName"
@@ -348,6 +351,7 @@ const ClassDetailPage = () => {
           <Button
             key="message"
             type="primary"
+            className="wow-btn"
             icon={<MessageOutlined />}
             onClick={() => {
               setShowParentModal(false);

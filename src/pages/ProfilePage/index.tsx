@@ -68,10 +68,12 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-page">
-      <Title level={2}>Hồ sơ cá nhân</Title>
+    <div className="wow-page profile-page">
+      <div className="wow-header">
+        <Title level={2}>Hồ sơ cá nhân</Title>
+      </div>
 
-      <Card>
+      <Card className="wow-card">
         <Row gutter={[24, 24]}>
           <Col xs={24} md={6}>
             <div className="profile-avatar-section">
@@ -131,7 +133,7 @@ const ProfilePage = () => {
                   </Form.Item>
 
                   <Form.Item>
-                    <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
+                    <Button type="primary" className="wow-btn" htmlType="submit" icon={<SaveOutlined />}>
                       Lưu thay đổi
                     </Button>
                   </Form.Item>
@@ -178,7 +180,7 @@ const ProfilePage = () => {
                   </Form.Item>
 
                   <Form.Item>
-                    <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
+                    <Button type="primary" className="wow-btn" htmlType="submit" icon={<SaveOutlined />}>
                       Đổi mật khẩu
                     </Button>
                   </Form.Item>
@@ -228,7 +230,7 @@ const ProfilePage = () => {
 
                     <Divider />
 
-                    <Button type="primary" icon={<SaveOutlined />}>
+                    <Button type="primary" className="wow-btn" icon={<SaveOutlined />}>
                       Lưu cài đặt
                     </Button>
                   </Space>

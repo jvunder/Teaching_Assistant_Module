@@ -26,6 +26,11 @@ export interface MockDashboard {
     totalParents: number;
     unreadMessages: number;
   };
+  parentSegments: {
+    notStarted: number;
+    slowProgress: number;
+    topPerformers: number;
+  };
   recentActivities: Array<{
     id: string;
     type: string;
@@ -77,85 +82,90 @@ export const mockDataService = {
     throw new Error('Email hoặc mật khẩu không đúng');
   },
 
-  // Mock dashboard data
+  // Mock dashboard data - ADULT EDUCATION PLATFORM
   async getDashboard(): Promise<MockDashboard> {
     await delay(800);
-    
+
     return {
       kpis: {
-        totalClasses: 12,
-        totalStudents: 356,
-        totalParents: 689,
-        unreadMessages: 23,
+        totalClasses: 8,        // Adult parenting courses
+        totalStudents: 68,      // Adult learners (NOT 356!)
+        totalParents: 68,       // Same as totalStudents (they ARE the learners)
+        unreadMessages: 15,     // Reduced from 23
+      },
+      parentSegments: {
+        notStarted: 12,
+        slowProgress: 18,
+        topPerformers: 38,
       },
       recentActivities: [
         {
           id: '1',
           type: 'message',
-          message: 'Nhận được tin nhắn từ phụ huynh Nguyễn Văn A',
-          time: '10 phút trước',
+          message: 'Gửi tin nhắn đến 25 học viên lớp "Nuôi dạy con 0-3 tuổi"',
+          time: '30 phút trước',
         },
         {
           id: '2',
           type: 'class',
-          message: 'Lớp Toán lớp 5 - Bài tập mới được gửi',
-          time: '1 giờ trước',
+          message: '15 học viên hoàn thành khóa "Tâm lý học đường"',
+          time: '2 giờ trước',
         },
         {
           id: '3',
-          type: 'survey',
-          message: 'Khảo sát "Phương pháp học tập" đã có 45 phản hồi',
-          time: '2 giờ trước',
+          type: 'attendance',
+          message: '20 học viên đã điểm danh buổi học tối nay',
+          time: '3 giờ trước',
         },
       ],
       classPerformance: [
-        { className: 'Toán lớp 5', participation: 85, attendance: 92 },
-        { className: 'Tiếng Việt lớp 4', participation: 78, attendance: 88 },
-        { className: 'Khoa học lớp 3', participation: 90, attendance: 95 },
-        { className: 'Lịch sử lớp 5', participation: 72, attendance: 85 },
+        { className: 'Nuôi dạy con 0-3 tuổi', participation: 92, attendance: 95 },
+        { className: 'Tâm lý học đường', participation: 85, attendance: 88 },
+        { className: 'Nuôi con bằng tình yêu thương', participation: 90, attendance: 92 },
+        { className: 'Kỹ năng giao tiếp với con', participation: 78, attendance: 85 },
       ],
     };
   },
 
-  // Mock classes
+  // Mock classes - ADULT PARENTING COURSES
   async getClasses(): Promise<MockClass[]> {
     await delay(600);
-    
+
     return [
       {
         id: '1',
-        name: 'Toán lớp 5',
-        grade: 'Lớp 5',
-        subject: 'Toán học',
-        studentCount: 35,
-        parentCount: 42,
-        teacherName: 'Cô Nguyễn Thị Lan',
+        name: 'Nuôi dạy con 0-3 tuổi',
+        grade: 'Cơ bản',
+        subject: 'Nuôi dạy con',
+        studentCount: 25,
+        parentCount: 25,  // Same (learners ARE parents)
+        teacherName: 'Cô Nguyễn Thị Hoa',
       },
       {
         id: '2',
-        name: 'Tiếng Việt lớp 4',
-        grade: 'Lớp 4',
-        subject: 'Tiếng Việt',
-        studentCount: 32,
-        parentCount: 38,
+        name: 'Tâm lý học đường',
+        grade: 'Trung cấp',
+        subject: 'Tâm lý trẻ em',
+        studentCount: 20,
+        parentCount: 20,
         teacherName: 'Thầy Trần Văn Nam',
       },
       {
         id: '3',
-        name: 'Khoa học lớp 3',
-        grade: 'Lớp 3',
-        subject: 'Khoa học',
-        studentCount: 28,
-        parentCount: 31,
-        teacherName: 'Cô Lê Thị Hoa',
+        name: 'Nuôi con bằng tình yêu thương',
+        grade: 'Cơ bản',
+        subject: 'Nuôi dạy con',
+        studentCount: 18,
+        parentCount: 18,
+        teacherName: 'Cô Lê Thị Mai',
       },
       {
         id: '4',
-        name: 'Lịch sử lớp 5',
-        grade: 'Lớp 5',
-        subject: 'Lịch sử',
-        studentCount: 30,
-        parentCount: 35,
+        name: 'Kỹ năng giao tiếp với con',
+        grade: 'Nâng cao',
+        subject: 'Kỹ năng nuôi dạy',
+        studentCount: 15,
+        parentCount: 15,
         teacherName: 'Thầy Phạm Văn Đức',
       },
     ];

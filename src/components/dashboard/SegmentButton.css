@@ -1,0 +1,254 @@
+/* ============================================
+   Segment Button Component - Design Spec Aligned
+   Based on: Section 4.1 - Parent Segments Section
+   ============================================ */
+
+.segment-button {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  height: 180px;
+}
+
+.segment-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.segment-button:active {
+  transform: scale(0.98);
+}
+
+.segment-button .ant-card-body {
+  padding: 0;
+  height: 100%;
+}
+
+/* ============================================
+   Segment Button Content
+   ============================================ */
+
+.segment-button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+/* Icon (64x64px emoji at top) */
+.segment-icon {
+  font-size: 64px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+/* Count (48px bold number) */
+.segment-count {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Label (16px semibold text) */
+.segment-label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Description (14px regular text) */
+.segment-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Arrow indicator */
+.segment-arrow {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.segment-button:hover .segment-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* ============================================
+   Gradient Variants (From Design Spec)
+   ============================================ */
+
+/* Not Started (Red theme) */
+.segment-button-danger {
+  background: linear-gradient(135deg, #DC3545 0%, #C82333 100%);
+}
+
+.segment-button-danger:hover {
+  background: linear-gradient(135deg, #C82333 0%, #A71D2A 100%);
+}
+
+/* Slow Progress (Orange theme) */
+.segment-button-warning {
+  background: linear-gradient(135deg, #FFC107 0%, #E0A800 100%);
+}
+
+.segment-button-warning:hover {
+  background: linear-gradient(135deg, #E0A800 0%, #C69500 100%);
+}
+
+/* TOP Performers (Green theme) */
+.segment-button-success {
+  background: linear-gradient(135deg, #28A745 0%, #1E7E34 100%);
+}
+
+.segment-button-success:hover {
+  background: linear-gradient(135deg, #1E7E34 0%, #155724 100%);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 992px) {
+  .segment-button {
+    height: 160px;
+  }
+
+  .segment-icon {
+    font-size: 48px;
+  }
+
+  .segment-count {
+    font-size: 40px;
+  }
+
+  .segment-label {
+    font-size: 15px;
+  }
+
+  .segment-description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .segment-button {
+    height: 140px;
+  }
+
+  .segment-icon {
+    font-size: 40px;
+    margin-bottom: 8px;
+  }
+
+  .segment-count {
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+
+  .segment-label {
+    font-size: 14px;
+  }
+
+  .segment-description {
+    font-size: 12px;
+  }
+
+  .segment-button-content {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .segment-button {
+    height: 120px;
+    margin-bottom: 12px;
+  }
+
+  .segment-icon {
+    font-size: 32px;
+    margin-bottom: 6px;
+  }
+
+  .segment-count {
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+
+  .segment-label {
+    font-size: 13px;
+  }
+
+  .segment-description {
+    font-size: 11px;
+  }
+
+  .segment-arrow {
+    display: none;
+  }
+}
+
+/* ============================================
+   Animation on Mount
+   ============================================ */
+
+@keyframes segmentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.segment-button {
+  animation: segmentFadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.segment-button:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.segment-button:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.segment-button:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+.segment-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.25);
+}
+
+.segment-button:focus-visible {
+  outline: 2px solid #0066CC;
+  outline-offset: 2px;
+}

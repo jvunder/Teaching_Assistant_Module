@@ -1,0 +1,131 @@
+{
+  "common": {
+    "welcome": "Chào mừng",
+    "logout": "Đăng xuất",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "add": "Thêm",
+    "search": "Tìm kiếm",
+    "loading": "Đang tải...",
+    "noData": "Không có dữ liệu",
+    "loadError": "Không thể tải dữ liệu"
+  },
+  "menu": {
+    "dashboard": "Tổng quan",
+    "classes": "Quản lý lớp học",
+    "messaging": "Tin nhắn",
+    "content": "Nội dung",
+    "analytics": "Phân tích",
+    "inbox": "Hộp thư hỗ trợ",
+    "profile": "Hồ sơ"
+  },
+  "dashboard": {
+    "title": "Dashboard Trợ giảng",
+    "welcome": "Chào mừng, {{name}}",
+    "stats": {
+      "totalClasses": "Tổng lớp học",
+      "totalStudents": "Tổng học viên",
+      "newMessages": "Tin nhắn mới",
+      "notifications": "Thông báo mới"
+    },
+    "recentActivities": "Hoạt động gần đây",
+    "activities": {
+      "message1": "Gửi tin nhắn đến 25 học viên lớp \"Nuôi dạy con 0-3 tuổi\"",
+      "message2": "15 học viên hoàn thành khóa \"Tâm lý học đường\"",
+      "message3": "20 học viên đã điểm danh buổi học tối nay"
+    },
+    "time": {
+      "minutes_ago": "{{count}} phút trước",
+      "hours_ago": "{{count}} giờ trước",
+      "days_ago": "{{count}} ngày trước"
+    }
+  },
+  "classes": {
+    "title": "Quản lý lớp học",
+    "searchPlaceholder": "Tìm kiếm lớp học...",
+    "table": {
+      "className": "Tên lớp",
+      "students": "Số học viên",
+      "subject": "Chủ đề",
+      "schedule": "Lịch học",
+      "status": "Trạng thái",
+      "actions": "Thao tác"
+    },
+    "status": {
+      "active": "Đang hoạt động",
+      "inactive": "Tạm dừng"
+    },
+    "viewDetails": "Xem chi tiết",
+    "total": "Tổng {{total}} lớp học"
+  },
+  "messaging": {
+    "title": "Tin nhắn",
+    "compose": "Soạn tin nhắn",
+    "recipient": "Người nhận",
+    "subject": "Tiêu đề",
+    "message": "Nội dung tin nhắn",
+    "send": "Gửi",
+    "sent": "Đã gửi",
+    "received": "Đã nhận",
+    "draft": "Nháp",
+    "selectRecipient": "Chọn người nhận",
+    "selectClass": "Chọn lớp học",
+    "selectParent": "Chọn phụ huynh",
+    "sendToAll": "Gửi tất cả",
+    "sendToClass": "Gửi theo lớp"
+  },
+  "content": {
+    "title": "Quản lý nội dung",
+    "upload": "Tải lên",
+    "createArticle": "Tạo bài viết",
+    "video": "Video",
+    "document": "Tài liệu",
+    "article": "Bài viết",
+    "filter": {
+      "all": "Tất cả",
+      "videos": "Video",
+      "documents": "Tài liệu",
+      "articles": "Bài viết"
+    }
+  },
+  "analytics": {
+    "title": "Phân tích",
+    "overview": "Tổng quan",
+    "studentProgress": "Tiến độ học viên",
+    "parentEngagement": "Tương tác học viên",
+    "messageStats": "Thống kê tin nhắn",
+    "exportPDF": "Xuất PDF",
+    "exportExcel": "Xuất Excel",
+    "chart": {
+      "weekly": "Theo tuần",
+      "monthly": "Theo tháng",
+      "yearly": "Theo năm"
+    }
+  },
+  "profile": {
+    "title": "Hồ sơ cá nhân",
+    "personalInfo": "Thông tin cá nhân",
+    "changePassword": "Đổi mật khẩu",
+    "settings": "Cài đặt",
+    "name": "Họ tên",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "school": "Trường",
+    "currentPassword": "Mật khẩu hiện tại",
+    "newPassword": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "saveChanges": "Lưu thay đổi",
+    "notifications": {
+      "email": "Thông báo qua email",
+      "sms": "Thông báo qua SMS",
+      "app": "Thông báo trong ứng dụng"
+    }
+  },
+  "language": {
+    "select": "Chọn ngôn ngữ",
+    "vietnamese": "Tiếng Việt",
+    "chinese": "中文"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(npm run build:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(npm run dev:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(nul)",
+      "Bash(timeout /t 2 /nobreak)",
+      "Bash(dir:*)",
+      "Bash(\"c:\\Users\\abc\\Desktop\\ta-webapp\\src\\types\\messaging.types.ts\" 2)",
+      "Bash(echo:*)",
+      "Bash(\"c:\\Users\\abc\\Desktop\\ta-webapp\\src\\components\\MessageQuota\\MessageQuota.css\" 2)",
+      "Bash(\"c:\\Users\\abc\\Desktop\\ta-webapp\\src\\components\\ta-dashboard\\CircularProgress.tsx\")",
+      "Bash(\"c:\\Users\\abc\\Desktop\\ta-webapp\\src\\components\\ta-dashboard\\CircularProgress.css\")",
+      "Bash(\"c:\\Users\\abc\\Desktop\\ta-webapp\\src\\components\\ContentAnalytics\\index.tsx\")",
+      "Bash(\"c:\\Users\\abc\\Desktop\\ta-webapp\\src\\components\\ContentAnalytics\\ContentAnalytics.css\")",
+      "Bash(npm install:*)",
+      "Bash(tasklist:*)",
+      "Bash(start http://localhost:5177)",
+      "Bash(cmd /c \"taskkill //F //PID 36776 & taskkill //F //PID 79400\")",
+      "Bash(start http://localhost:5174)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

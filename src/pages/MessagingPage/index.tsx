@@ -122,13 +122,15 @@ const MessagingPage = () => {
   };
 
   return (
-    <div className="messaging-page">
-      <h1>Gửi tin nhắn</h1>
+    <div className="wow-page messaging-page">
+      <div className="wow-header">
+        <h1>Gửi tin nhắn</h1>
+      </div>
 
       <Row gutter={[16, 16]}>
         {/* Left Column - Message Editor */}
         <Col xs={24} lg={16}>
-          <Card title="Soạn tin nhắn" className="message-editor-card">
+          <Card title="Soạn tin nhắn" className="wow-card message-editor-card">
             <Form form={form} layout="vertical">
               {/* Template Selector */}
               <Form.Item label="Chọn mẫu tin nhắn">
@@ -196,6 +198,7 @@ const MessagingPage = () => {
                 <Space>
                   <Button
                     type="primary"
+                    className="wow-btn"
                     icon={<SendOutlined />}
                     onClick={handleSend}
                     disabled={!messageContent.trim()}
@@ -216,11 +219,11 @@ const MessagingPage = () => {
           <Card
             title={
               <Space>
-                <FilterOutlined />
+                <FilterOutlined className="icon-blue" />
                 <span>Lọc người nhận</span>
               </Space>
             }
-            className="filter-card"
+            className="wow-card filter-card"
           >
             <Alert
               message="Chọn điều kiện để lọc danh sách người nhận"
@@ -362,7 +365,7 @@ const MessagingPage = () => {
           <Button key="cancel" onClick={() => setShowPreview(false)}>
             Đóng
           </Button>,
-          <Button key="send" type="primary" onClick={handleSend}>
+          <Button key="send" type="primary" className="wow-btn" onClick={handleSend}>
             Gửi ngay
           </Button>,
         ]}

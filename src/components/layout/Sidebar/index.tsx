@@ -1,5 +1,6 @@
 import { Menu } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   DashboardOutlined,
   TeamOutlined,
@@ -14,44 +15,6 @@ import './Sidebar.css';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const menuItems: MenuItem[] = [
-  {
-    key: '/dashboard',
-    icon: <DashboardOutlined />,
-    label: 'Dashboard',
-  },
-  {
-    key: '/classes',
-    icon: <TeamOutlined />,
-    label: 'Quản lý lớp học',
-  },
-  {
-    key: '/messaging',
-    icon: <MessageOutlined />,
-    label: 'Tin nhắn',
-  },
-  {
-    key: '/content',
-    icon: <FileTextOutlined />,
-    label: 'Nội dung',
-  },
-  {
-    key: '/analytics',
-    icon: <BarChartOutlined />,
-    label: 'Phân tích',
-  },
-  {
-    key: '/inbox',
-    icon: <InboxOutlined />,
-    label: 'Hộp thư hỗ trợ',
-  },
-  {
-    key: '/profile',
-    icon: <UserOutlined />,
-    label: 'Hồ sơ',
-  },
-];
-
 interface SidebarProps {
   collapsed?: boolean;
 }
@@ -59,6 +22,45 @@ interface SidebarProps {
 const Sidebar = ({ collapsed }: SidebarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
+
+  const menuItems: MenuItem[] = [
+    {
+      key: '/dashboard',
+      icon: <DashboardOutlined />,
+      label: t('menu.dashboard'),
+    },
+    {
+      key: '/classes',
+      icon: <TeamOutlined />,
+      label: t('menu.classes'),
+    },
+    {
+      key: '/messaging',
+      icon: <MessageOutlined />,
+      label: t('menu.messaging'),
+    },
+    {
+      key: '/content',
+      icon: <FileTextOutlined />,
+      label: t('menu.content'),
+    },
+    {
+      key: '/analytics',
+      icon: <BarChartOutlined />,
+      label: t('menu.analytics'),
+    },
+    {
+      key: '/inbox',
+      icon: <InboxOutlined />,
+      label: t('menu.inbox'),
+    },
+    {
+      key: '/profile',
+      icon: <UserOutlined />,
+      label: t('menu.profile'),
+    },
+  ];
 
   const handleMenuClick = ({ key }: { key: string }) => {
     navigate(key);
@@ -81,6 +83,3 @@ const Sidebar = ({ collapsed }: SidebarProps) => {
 };
 
 export default Sidebar;
-
-
-

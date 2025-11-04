@@ -1,0 +1,131 @@
+{
+  "common": {
+    "welcome": "欢迎",
+    "logout": "登出",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "search": "搜索",
+    "loading": "加载中...",
+    "noData": "暂无数据",
+    "loadError": "无法加载数据"
+  },
+  "menu": {
+    "dashboard": "仪表板",
+    "classes": "班级管理",
+    "messaging": "消息",
+    "content": "内容",
+    "analytics": "分析",
+    "inbox": "收件箱",
+    "profile": "个人资料"
+  },
+  "dashboard": {
+    "title": "助教仪表板",
+    "welcome": "欢迎，{{name}}",
+    "stats": {
+      "totalClasses": "班级总数",
+      "totalStudents": "学员总数",
+      "newMessages": "新消息",
+      "notifications": "新通知"
+    },
+    "recentActivities": "最近活动",
+    "activities": {
+      "message1": "向25位学员发送了\"0-3岁育儿\"课程消息",
+      "message2": "15位学员完成了\"学校心理学\"课程",
+      "message3": "20位学员已签到今晚的课程"
+    },
+    "time": {
+      "minutes_ago": "{{count}}分钟前",
+      "hours_ago": "{{count}}小时前",
+      "days_ago": "{{count}}天前"
+    }
+  },
+  "classes": {
+    "title": "班级管理",
+    "searchPlaceholder": "搜索班级...",
+    "table": {
+      "className": "班级名称",
+      "students": "学生人数",
+      "subject": "科目",
+      "schedule": "课程表",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "status": {
+      "active": "活跃",
+      "inactive": "暂停"
+    },
+    "viewDetails": "查看详情",
+    "total": "共{{total}}个班级"
+  },
+  "messaging": {
+    "title": "消息",
+    "compose": "撰写消息",
+    "recipient": "收件人",
+    "subject": "主题",
+    "message": "消息内容",
+    "send": "发送",
+    "sent": "已发送",
+    "received": "已接收",
+    "draft": "草稿",
+    "selectRecipient": "选择收件人",
+    "selectClass": "选择班级",
+    "selectParent": "选择家长",
+    "sendToAll": "发送给所有人",
+    "sendToClass": "按班级发送"
+  },
+  "content": {
+    "title": "内容管理",
+    "upload": "上传",
+    "createArticle": "创建文章",
+    "video": "视频",
+    "document": "文档",
+    "article": "文章",
+    "filter": {
+      "all": "全部",
+      "videos": "视频",
+      "documents": "文档",
+      "articles": "文章"
+    }
+  },
+  "analytics": {
+    "title": "分析",
+    "overview": "概览",
+    "studentProgress": "学生进度",
+    "parentEngagement": "家长参与度",
+    "messageStats": "消息统计",
+    "exportPDF": "导出PDF",
+    "exportExcel": "导出Excel",
+    "chart": {
+      "weekly": "每周",
+      "monthly": "每月",
+      "yearly": "每年"
+    }
+  },
+  "profile": {
+    "title": "个人资料",
+    "personalInfo": "个人信息",
+    "changePassword": "更改密码",
+    "settings": "设置",
+    "name": "姓名",
+    "email": "电子邮箱",
+    "phone": "电话号码",
+    "school": "学校",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认密码",
+    "saveChanges": "保存更改",
+    "notifications": {
+      "email": "电子邮件通知",
+      "sms": "短信通知",
+      "app": "应用内通知"
+    }
+  },
+  "language": {
+    "select": "选择语言",
+    "vietnamese": "Tiếng Việt",
+    "chinese": "中文"
+  }
+}

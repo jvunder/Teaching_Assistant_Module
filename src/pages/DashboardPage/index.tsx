@@ -1,20 +1,39 @@
-import { useEffect, useState } from 'react';
-import { Row, Col, Card, Statistic, Table, Tag, Spin, Alert } from 'antd';
+/**
+ * Dashboard Trợ giảng - Tổng quan
+ * AnhHuy EduConnect V1 - AI Teaching Assistant Platform
+ *
+ * Based on: Webapp-Tro-Giang-UI-UX-Design-Spec.pdf (Page 4-6)
+ * Priority: P0 (Must Have)
+ */
+
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, Statistic, Typography, Button, Space, List, Spin, Alert } from 'antd';
 import {
-  TeamOutlined,
-  UserOutlined,
-  MessageOutlined,
   BookOutlined,
-  ArrowUpOutlined,
+  TeamOutlined,
+  MessageOutlined,
+  BulbOutlined,
+  ClockCircleOutlined,
 } from '@ant-design/icons';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useTranslation } from 'react-i18next';
 import { mockDataService, type MockDashboard } from '@/services/mockData.service';
 import './DashboardPage.css';
 
-const DashboardPage = () => {
+const { Title, Text } = Typography;
+
+interface Activity {
+  id: string;
+  icon: string;
+  message: string;
+  time: string;
+}
+
+const DashboardPage: React.FC = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState<MockDashboard | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   useEffect(() => {
     loadDashboardData();
@@ -27,7 +46,7 @@ const DashboardPage = () => {
       const data = await mockDataService.getDashboard();
       setDashboardData(data);
     } catch (err: any) {
-      setError(err?.message || 'Không thể tải dữ liệu dashboard');
+      setError(err?.message || t('common.loadError'));
     } finally {
       setLoading(false);
     }
@@ -36,149 +55,197 @@ const DashboardPage = () => {
   if (loading) {
     return (
       <div className="dashboard-loading">
-        <Spin size="large" />
+        <Spin size="large" tip={t('common.loading')} />
       </div>
     );
   }
 
   if (error) {
-    return <Alert message={error} type="error" />;
+    return (
+      <div className="dashboard-error">
+        <Alert
+          message={t('common.loadError')}
+          description={error}
+          type="error"
+          showIcon
+        />
+      </div>
+    );
   }
 
   if (!dashboardData) {
-    return <Alert message="Không có dữ liệu" type="warning" />;
+    return (
+      <div className="dashboard-error">
+        <Alert message={t('common.noData')} type="warning" showIcon />
+      </div>
+    );
   }
 
-  // Prepare chart data
-  const chartData = dashboardData.classPerformance.map((item) => ({
-    name: item.className,
-    'Tỷ lệ tham gia': item.participation,
-    'Điểm danh': item.attendance,
-  }));
-
-  // Recent activities table
-  const activitiesColumns = [
+  // Activities using i18n translations
+  const recentActivities: Activity[] = [
     {
-      title: 'Hoạt động',
-      dataIndex: 'message',
-      key: 'message',
+      id: '1',
+      icon: '✉️',
+      message: t('dashboard.activities.message1'),
+      time: t('dashboard.time.minutes_ago', { count: 10 }),
     },
     {
-      title: 'Loại',
-      dataIndex: 'type',
-      key: 'type',
-      render: (type: string) => {
-        const colors: Record<string, string> = {
-          message: 'blue',
-          class: 'green',
-          survey: 'orange',
-        };
-        return <Tag color={colors[type] || 'default'}>{type}</Tag>;
-      },
+      id: '2',
+      icon: '📚',
+      message: t('dashboard.activities.message2'),
+      time: t('dashboard.time.hours_ago', { count: 1 }),
     },
     {
-      title: 'Thời gian',
-      dataIndex: 'time',
-      key: 'time',
+      id: '3',
+      icon: '📝',
+      message: t('dashboard.activities.message3'),
+      time: t('dashboard.time.hours_ago', { count: 2 }),
     },
   ];
 
   return (
-    <div className="dashboard-page">
-      <h1 className="dashboard-title">Dashboard</h1>
+    <div className="ta-dashboard-page">
+      {/* Header */}
+      <div className="dashboard-header">
+        <Title level={2}>{t('dashboard.title')}</Title>
+        <Text type="secondary">{t('dashboard.welcome', { name: 'Cô Lan' })}</Text>
+      </div>
 
-      {/* KPI Cards */}
-      <Row gutter={[16, 16]} className="dashboard-kpis">
+      {/* Statistics Cards - 4 cards in row */}
+      <Row gutter={[16, 16]} className="dashboard-stats-row">
+        {/* Card 1: Tổng lớp */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card
+            className="ta-stat-card stat-card-primary"
+            bordered={false}
+            onMouseEnter={() => setHoveredCard('classes')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-blue">
+                <BookOutlined style={{ fontSize: 24, color: 'white' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tổng số lớp"
-              value={dashboardData.kpis.totalClasses}
-              prefix={<BookOutlined />}
-              valueStyle={{ color: '#1890ff' }}
+              value={dashboardData.kpis.totalClasses || 8}
+              valueStyle={{
+                fontSize: 32,
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #667eea, #764ba2)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
             />
+            <div className="stat-label">{t('dashboard.stats.totalClasses')}</div>
           </Card>
         </Col>
+
+        {/* Card 2: Học sinh */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card
+            className="ta-stat-card stat-card-success"
+            bordered={false}
+            onMouseEnter={() => setHoveredCard('students')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-green">
+                <TeamOutlined style={{ fontSize: 24, color: 'white' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tổng số học sinh"
-              value={dashboardData.kpis.totalStudents}
-              prefix={<TeamOutlined />}
-              valueStyle={{ color: '#52c41a' }}
-              suffix={<ArrowUpOutlined />}
+              value={dashboardData.kpis.totalStudents || 240}
+              valueStyle={{
+                fontSize: 32,
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #11998e, #38ef7d)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
             />
+            <div className="stat-label">{t('dashboard.stats.totalStudents')}</div>
           </Card>
         </Col>
+
+        {/* Card 3: Tin nhắn mới */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card
+            className="ta-stat-card stat-card-warning"
+            bordered={false}
+            onMouseEnter={() => setHoveredCard('messages')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-orange">
+                <MessageOutlined style={{ fontSize: 24, color: 'white' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tổng số phụ huynh"
-              value={dashboardData.kpis.totalParents}
-              prefix={<UserOutlined />}
-              valueStyle={{ color: '#722ed1' }}
+              value={dashboardData.kpis.unreadMessages || 15}
+              valueStyle={{
+                fontSize: 32,
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #f093fb, #f5576c)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
             />
+            <div className="stat-label">{t('dashboard.stats.newMessages')}</div>
           </Card>
         </Col>
+
+        {/* Card 4: Thông báo mới */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card
+            className="ta-stat-card stat-card-teal"
+            bordered={false}
+            onMouseEnter={() => setHoveredCard('notifications')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-teal">
+                <BulbOutlined style={{ fontSize: 24, color: 'white' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tin nhắn chưa đọc"
-              value={dashboardData.kpis.unreadMessages}
-              prefix={<MessageOutlined />}
-              valueStyle={{ color: '#fa8c16' }}
+              value={5}
+              valueStyle={{
+                fontSize: 32,
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #4facfe, #00f2fe)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
             />
+            <div className="stat-label">{t('dashboard.stats.notifications')}</div>
           </Card>
         </Col>
       </Row>
 
-      {/* Charts Row */}
-      <Row gutter={[16, 16]} className="dashboard-charts">
-        <Col xs={24} lg={12}>
-          <Card title="Hiệu suất lớp học" className="chart-card">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="Tỷ lệ tham gia" fill="#1890ff" />
-                <Bar dataKey="Điểm danh" fill="#52c41a" />
-              </BarChart>
-            </ResponsiveContainer>
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card title="Xu hướng tham gia" className="chart-card">
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="Tỷ lệ tham gia" stroke="#1890ff" />
-                <Line type="monotone" dataKey="Điểm danh" stroke="#52c41a" />
-              </LineChart>
-            </ResponsiveContainer>
-          </Card>
-        </Col>
-      </Row>
 
       {/* Recent Activities */}
-      <Row gutter={[16, 16]} className="dashboard-activities">
-        <Col xs={24}>
-          <Card title="Hoạt động gần đây">
-            <Table
-              dataSource={dashboardData.recentActivities}
-              columns={activitiesColumns}
-              rowKey="id"
-              pagination={false}
-            />
-          </Card>
-        </Col>
-      </Row>
+      <div className="dashboard-activities-section">
+        <Title level={3} className="section-title">{t('dashboard.recentActivities')}</Title>
+        <Card bordered={false} className="activities-card">
+          <List
+            dataSource={recentActivities}
+            renderItem={(activity) => (
+              <List.Item className="activity-item">
+                <div className="activity-content">
+                  <span className="activity-icon">{activity.icon}</span>
+                  <div className="activity-text">
+                    <Text style={{ display: 'block' }}>{activity.message}</Text>
+                    <Text type="secondary" className="activity-time">
+                      <ClockCircleOutlined style={{ marginRight: 4 }} />
+                      {activity.time}
+                    </Text>
+                  </div>
+                </div>
+              </List.Item>
+            )}
+          />
+        </Card>
+      </div>
     </div>
   );
 };

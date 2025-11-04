@@ -140,9 +140,9 @@ const ContentPage = () => {
       render: (text, record) => (
         <Space>
           {record.type === 'video' ? (
-            <PlayCircleOutlined style={{ color: '#1890ff' }} />
+            <PlayCircleOutlined className="icon-blue" />
           ) : (
-            <FileTextOutlined style={{ color: '#52c41a' }} />
+            <FileTextOutlined className="icon-green" />
           )}
           <span>{text}</span>
         </Space>
@@ -206,12 +206,13 @@ const ContentPage = () => {
   ];
 
   return (
-    <div className="content-page">
-      <div className="content-header">
+    <div className="wow-page content-page">
+      <div className="wow-header content-header">
         <Title level={2}>Quản lý nội dung</Title>
         <Space>
           <Button
             type="primary"
+            className="wow-btn"
             icon={<UploadOutlined />}
             onClick={() => setShowUploadModal(true)}
           >
@@ -227,7 +228,7 @@ const ContentPage = () => {
         </Space>
       </div>
 
-      <Card>
+      <Card className="wow-card">
         <Tabs activeKey={activeTab} onChange={setActiveTab}>
           <TabPane tab="Tất cả" key="all" />
           <TabPane tab="Đã xuất bản" key="published" />
@@ -235,6 +236,7 @@ const ContentPage = () => {
         </Tabs>
 
         <Table
+          className="wow-table"
           columns={columns}
           dataSource={filteredContents}
           rowKey="id"
@@ -299,7 +301,7 @@ const ContentPage = () => {
 
           <Form.Item>
             <Space>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" className="wow-btn" htmlType="submit">
                 Upload
               </Button>
               <Button onClick={() => setShowUploadModal(false)}>Hủy</Button>
@@ -351,7 +353,7 @@ const ContentPage = () => {
 
           <Form.Item>
             <Space>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" className="wow-btn" htmlType="submit">
                 Tạo bài viết
               </Button>
               <Button onClick={() => setShowArticleModal(false)}>Hủy</Button>

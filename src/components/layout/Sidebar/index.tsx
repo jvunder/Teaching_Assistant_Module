@@ -8,6 +8,8 @@ import {
   BarChartOutlined,
   InboxOutlined,
   UserOutlined,
+  RobotOutlined,
+  BulbOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import './Sidebar.css';
@@ -19,6 +21,23 @@ const menuItems: MenuItem[] = [
     key: '/dashboard',
     icon: <DashboardOutlined />,
     label: 'Dashboard',
+  },
+  {
+    key: 'ai-features',
+    icon: <RobotOutlined />,
+    label: 'Tính năng AI',
+    children: [
+      {
+        key: '/ai-lesson-plan',
+        icon: <BulbOutlined />,
+        label: 'Tạo giáo án AI',
+      },
+      {
+        key: '/ai-message-suggestion',
+        icon: <MessageOutlined />,
+        label: 'Gợi ý tin nhắn AI',
+      },
+    ],
   },
   {
     key: '/classes',

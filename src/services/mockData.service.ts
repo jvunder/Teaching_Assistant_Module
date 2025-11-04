@@ -26,6 +26,11 @@ export interface MockDashboard {
     totalParents: number;
     unreadMessages: number;
   };
+  parentSegments: {
+    notStarted: number;
+    slowProgress: number;
+    topPerformers: number;
+  };
   recentActivities: Array<{
     id: string;
     type: string;
@@ -80,13 +85,18 @@ export const mockDataService = {
   // Mock dashboard data
   async getDashboard(): Promise<MockDashboard> {
     await delay(800);
-    
+
     return {
       kpis: {
         totalClasses: 12,
         totalStudents: 356,
-        totalParents: 689,
+        totalParents: 385,
         unreadMessages: 23,
+      },
+      parentSegments: {
+        notStarted: 85,
+        slowProgress: 42,
+        topPerformers: 128,
       },
       recentActivities: [
         {

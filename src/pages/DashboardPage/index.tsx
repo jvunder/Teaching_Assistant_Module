@@ -1,17 +1,35 @@
-import { useEffect, useState } from 'react';
-import { Row, Col, Card, Statistic, Table, Tag, Spin, Alert } from 'antd';
+/**
+ * Dashboard Trợ giảng - Tổng quan
+ * AnhHuy EduConnect V1 - AI Teaching Assistant Platform
+ *
+ * Based on: Webapp-Tro-Giang-UI-UX-Design-Spec.pdf (Page 4-6)
+ * Priority: P0 (Must Have)
+ */
+
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, Statistic, Typography, Button, Space, List, Spin, Alert } from 'antd';
 import {
-  TeamOutlined,
-  UserOutlined,
-  MessageOutlined,
   BookOutlined,
-  ArrowUpOutlined,
+  TeamOutlined,
+  MessageOutlined,
+  BulbOutlined,
+  RobotOutlined,
+  SendOutlined,
+  ClockCircleOutlined,
 } from '@ant-design/icons';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { mockDataService, type MockDashboard } from '@/services/mockData.service';
 import './DashboardPage.css';
 
-const DashboardPage = () => {
+const { Title, Text } = Typography;
+
+interface Activity {
+  id: string;
+  icon: string;
+  message: string;
+  time: string;
+}
+
+const DashboardPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState<MockDashboard | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -36,149 +54,201 @@ const DashboardPage = () => {
   if (loading) {
     return (
       <div className="dashboard-loading">
-        <Spin size="large" />
+        <Spin size="large" tip="Đang tải dữ liệu..." />
       </div>
     );
   }
 
   if (error) {
-    return <Alert message={error} type="error" />;
+    return (
+      <div className="dashboard-error">
+        <Alert
+          message="Lỗi tải dữ liệu"
+          description={error}
+          type="error"
+          showIcon
+        />
+      </div>
+    );
   }
 
   if (!dashboardData) {
-    return <Alert message="Không có dữ liệu" type="warning" />;
+    return (
+      <div className="dashboard-error">
+        <Alert message="Không có dữ liệu" type="warning" showIcon />
+      </div>
+    );
   }
 
-  // Prepare chart data
-  const chartData = dashboardData.classPerformance.map((item) => ({
-    name: item.className,
-    'Tỷ lệ tham gia': item.participation,
-    'Điểm danh': item.attendance,
-  }));
-
-  // Recent activities table
-  const activitiesColumns = [
+  // Mock data for activities
+  const recentActivities: Activity[] = [
     {
-      title: 'Hoạt động',
-      dataIndex: 'message',
-      key: 'message',
+      id: '1',
+      icon: '✉️',
+      message: 'Cô Hoa đã gửi tin nhắn đến lớp 5A',
+      time: '10 phút trước',
     },
     {
-      title: 'Loại',
-      dataIndex: 'type',
-      key: 'type',
-      render: (type: string) => {
-        const colors: Record<string, string> = {
-          message: 'blue',
-          class: 'green',
-          survey: 'orange',
-        };
-        return <Tag color={colors[type] || 'default'}>{type}</Tag>;
-      },
+      id: '2',
+      icon: '📚',
+      message: '15 phụ huynh hoàn thành khóa học "Nuôi dạy con"',
+      time: '1 giờ trước',
     },
     {
-      title: 'Thời gian',
-      dataIndex: 'time',
-      key: 'time',
+      id: '3',
+      icon: '📝',
+      message: 'Giáo án Toán lớp 6 đã được tạo',
+      time: '2 giờ trước',
     },
   ];
 
   return (
-    <div className="dashboard-page">
-      <h1 className="dashboard-title">Dashboard</h1>
+    <div className="ta-dashboard-page">
+      {/* Header */}
+      <div className="dashboard-header">
+        <Title level={2}>Dashboard Trợ giảng</Title>
+        <Text type="secondary">Chào mừng, Cô Lan</Text>
+      </div>
 
-      {/* KPI Cards */}
-      <Row gutter={[16, 16]} className="dashboard-kpis">
+      {/* Statistics Cards - 4 cards in row */}
+      <Row gutter={[16, 16]} className="dashboard-stats-row">
+        {/* Card 1: Tổng lớp */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="ta-stat-card stat-card-primary" bordered={false}>
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-blue">
+                <BookOutlined style={{ fontSize: 24, color: '#0066CC' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tổng số lớp"
-              value={dashboardData.kpis.totalClasses}
-              prefix={<BookOutlined />}
-              valueStyle={{ color: '#1890ff' }}
+              value={dashboardData.kpis.totalClasses || 8}
+              valueStyle={{ fontSize: 28, fontWeight: 700, color: '#212529' }}
             />
+            <div className="stat-label">Tổng lớp học</div>
           </Card>
         </Col>
+
+        {/* Card 2: Học sinh */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="ta-stat-card stat-card-success" bordered={false}>
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-green">
+                <TeamOutlined style={{ fontSize: 24, color: '#28A745' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tổng số học sinh"
-              value={dashboardData.kpis.totalStudents}
-              prefix={<TeamOutlined />}
-              valueStyle={{ color: '#52c41a' }}
-              suffix={<ArrowUpOutlined />}
+              value={dashboardData.kpis.totalStudents || 240}
+              valueStyle={{ fontSize: 28, fontWeight: 700, color: '#212529' }}
             />
+            <div className="stat-label">Tổng học sinh</div>
           </Card>
         </Col>
+
+        {/* Card 3: Tin nhắn mới */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="ta-stat-card stat-card-warning" bordered={false}>
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-orange">
+                <MessageOutlined style={{ fontSize: 24, color: '#FFC107' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tổng số phụ huynh"
-              value={dashboardData.kpis.totalParents}
-              prefix={<UserOutlined />}
-              valueStyle={{ color: '#722ed1' }}
+              value={dashboardData.kpis.unreadMessages || 15}
+              valueStyle={{ fontSize: 28, fontWeight: 700, color: '#212529' }}
             />
+            <div className="stat-label">Tin nhắn mới</div>
           </Card>
         </Col>
+
+        {/* Card 4: Gợi ý AI */}
         <Col xs={24} sm={12} lg={6}>
-          <Card>
+          <Card className="ta-stat-card stat-card-teal" bordered={false}>
+            <div className="stat-icon-wrapper">
+              <div className="stat-icon stat-icon-teal">
+                <BulbOutlined style={{ fontSize: 24, color: '#4ECDC4' }} />
+              </div>
+            </div>
             <Statistic
-              title="Tin nhắn chưa đọc"
-              value={dashboardData.kpis.unreadMessages}
-              prefix={<MessageOutlined />}
-              valueStyle={{ color: '#fa8c16' }}
+              value={3}
+              valueStyle={{ fontSize: 28, fontWeight: 700, color: '#212529' }}
             />
+            <div className="stat-label">Gợi ý AI mới</div>
           </Card>
         </Col>
       </Row>
 
-      {/* Charts Row */}
-      <Row gutter={[16, 16]} className="dashboard-charts">
-        <Col xs={24} lg={12}>
-          <Card title="Hiệu suất lớp học" className="chart-card">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="Tỷ lệ tham gia" fill="#1890ff" />
-                <Bar dataKey="Điểm danh" fill="#52c41a" />
-              </BarChart>
-            </ResponsiveContainer>
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card title="Xu hướng tham gia" className="chart-card">
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="Tỷ lệ tham gia" stroke="#1890ff" />
-                <Line type="monotone" dataKey="Điểm danh" stroke="#52c41a" />
-              </LineChart>
-            </ResponsiveContainer>
-          </Card>
-        </Col>
-      </Row>
+      {/* AI Features Section */}
+      <div className="dashboard-ai-section">
+        <Title level={3} className="section-title">Tính năng AI</Title>
+        <Row gutter={[16, 16]}>
+          <Col xs={24} md={12}>
+            <Card
+              className="ai-feature-card ai-card-teal"
+              bordered={false}
+              hoverable
+            >
+              <div className="ai-card-content">
+                <div className="ai-icon">
+                  <RobotOutlined style={{ fontSize: 48 }} />
+                </div>
+                <div className="ai-text">
+                  <Title level={4} style={{ color: 'white', margin: 0 }}>
+                    Tạo giáo án bằng AI
+                  </Title>
+                  <Text style={{ color: 'rgba(255,255,255,0.9)' }}>
+                    Tiết kiệm thời gian chuẩn bị
+                  </Text>
+                </div>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={24} md={12}>
+            <Card
+              className="ai-feature-card ai-card-blue"
+              bordered={false}
+              hoverable
+            >
+              <div className="ai-card-content">
+                <div className="ai-icon">
+                  <SendOutlined style={{ fontSize: 48 }} />
+                </div>
+                <div className="ai-text">
+                  <Title level={4} style={{ color: 'white', margin: 0 }}>
+                    Gợi ý tin nhắn thông minh
+                  </Title>
+                  <Text style={{ color: 'rgba(255,255,255,0.9)' }}>
+                    AI hỗ trợ giao tiếp
+                  </Text>
+                </div>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+      </div>
 
       {/* Recent Activities */}
-      <Row gutter={[16, 16]} className="dashboard-activities">
-        <Col xs={24}>
-          <Card title="Hoạt động gần đây">
-            <Table
-              dataSource={dashboardData.recentActivities}
-              columns={activitiesColumns}
-              rowKey="id"
-              pagination={false}
-            />
-          </Card>
-        </Col>
-      </Row>
+      <div className="dashboard-activities-section">
+        <Title level={3} className="section-title">Hoạt động gần đây</Title>
+        <Card bordered={false} className="activities-card">
+          <List
+            dataSource={recentActivities}
+            renderItem={(activity) => (
+              <List.Item className="activity-item">
+                <div className="activity-content">
+                  <span className="activity-icon">{activity.icon}</span>
+                  <Space direction="vertical" size={0} style={{ flex: 1 }}>
+                    <Text>{activity.message}</Text>
+                    <Text type="secondary" style={{ fontSize: 12 }}>
+                      <ClockCircleOutlined /> {activity.time}
+                    </Text>
+                  </Space>
+                </div>
+              </List.Item>
+            )}
+          />
+        </Card>
+      </div>
     </div>
   );
 };

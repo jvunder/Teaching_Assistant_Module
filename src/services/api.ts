@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { AxiosInstance } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 import axiosRetry from 'axios-retry';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1/ta';
@@ -46,4 +46,81 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// ========================================
+// UPLOAD HELPERS
+// ========================================
+
+export type UploadProgressCallback = (progress: number) => void;
+
+/**
+ * Create axios config for file upload with progress tracking
+ */
+export function createUploadConfig(onProgress?: UploadProgressCallback): AxiosRequestConfig {
+  return {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    timeout: 300000, // 5 minutes for large file uploads
+    onUploadProgress: (progressEvent) => {
+      if (onProgress && progressEvent.total) {
+        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        onProgress(percentCompleted);
+      }
+    },
+  };
+}
+
+/**
+ * Upload file with progress tracking
+ */
+export async function uploadFile<T>(
+  endpoint: string,
+  file: File,
+  additionalData?: Record<string, any>,
+  onProgress?: UploadProgressCallback
+) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  // Add additional data to form
+  if (additionalData) {
+    Object.entries(additionalData).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, String(value));
+      }
+    });
+  }
+
+  const config = createUploadConfig(onProgress);
+  return api.post<T>(endpoint, formData, config);
+}
+
+/**
+ * Upload multiple files with progress tracking
+ */
+export async function uploadMultipleFiles<T>(
+  endpoint: string,
+  files: File[],
+  additionalData?: Record<string, any>,
+  onProgress?: UploadProgressCallback
+) {
+  const formData = new FormData();
+
+  files.forEach((file, index) => {
+    formData.append(`files[${index}]`, file);
+  });
+
+  // Add additional data to form
+  if (additionalData) {
+    Object.entries(additionalData).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, String(value));
+      }
+    });
+  }
+
+  const config = createUploadConfig(onProgress);
+  return api.post<T>(endpoint, formData, config);
+}
 

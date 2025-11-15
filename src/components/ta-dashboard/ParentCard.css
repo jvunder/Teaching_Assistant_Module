@@ -1,0 +1,323 @@
+/* Parent Card Component Styles */
+
+.parent-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.parent-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.parent-card.compact {
+  padding: 12px;
+}
+
+.parent-card .ant-card-body {
+  padding: 20px;
+}
+
+/* Compact Card */
+.compact-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.compact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Card Header */
+.card-header {
+  margin-bottom: 8px;
+}
+
+.parent-avatar {
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.parent-basic-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.parent-name {
+  font-size: 18px;
+  color: #262626;
+  line-height: 1.4;
+}
+
+.segment-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.segment-badge .ant-badge {
+  line-height: 1;
+}
+
+.last-active {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Contact Info */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.info-icon {
+  color: #1890ff;
+  font-size: 14px;
+  width: 16px;
+}
+
+.info-text {
+  font-size: 13px;
+  color: #595959;
+  word-break: break-word;
+}
+
+/* Learning Progress */
+.learning-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-stats {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.progress-stats .ant-typography {
+  font-size: 12px;
+}
+
+/* Children Info */
+.children-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.children-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.children-list .ant-tag {
+  margin: 0;
+}
+
+/* Additional Stats */
+.additional-stats {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.additional-stats .ant-tag {
+  margin: 4px 0;
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.card-actions .ant-btn {
+  flex: 1;
+  border-radius: 6px;
+}
+
+.card-actions .ant-btn-primary {
+  background: #1890ff;
+}
+
+/* Hover Effects */
+.parent-card:hover .parent-avatar {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.info-item:hover {
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin: 0 -8px;
+}
+
+/* Progress Bar */
+.learning-progress .ant-progress {
+  margin: 4px 0;
+}
+
+.learning-progress .ant-progress-text {
+  font-weight: 500;
+}
+
+/* Badges */
+.segment-badge .ant-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+/* Dividers */
+.parent-card .ant-divider {
+  margin: 12px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .parent-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .parent-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .parent-name {
+    font-size: 16px;
+  }
+
+  .contact-info {
+    gap: 6px;
+  }
+
+  .info-text {
+    font-size: 12px;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-actions .ant-btn {
+    width: 100%;
+  }
+
+  .progress-stats {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .parent-card .ant-card-body {
+    padding: 12px;
+  }
+
+  .parent-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .parent-name {
+    font-size: 15px;
+  }
+
+  .compact-content {
+    gap: 8px;
+  }
+
+  .segment-badge .ant-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+}
+
+/* Animation */
+.parent-card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading State */
+.parent-card.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Status Indicators */
+.parent-card .ant-badge-status {
+  display: flex;
+  align-items: center;
+}
+
+/* Icons */
+.parent-card .anticon {
+  vertical-align: middle;
+}
+
+/* Typography */
+.parent-card .ant-typography {
+  margin-bottom: 0;
+}
+
+/* Tags */
+.parent-card .ant-tag {
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Success State */
+.ant-typography.ant-typography-success {
+  color: #52c41a;
+}
+
+/* Tooltips */
+.parent-card .ant-tooltip {
+  max-width: 300px;
+}

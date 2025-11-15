@@ -1,0 +1,217 @@
+.purchase-report-page {
+  padding: 24px;
+  background: #F8F9FA;
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.page-description {
+  font-size: 16px;
+  color: #666;
+  margin: 8px 0 0 0;
+}
+
+/* Summary Statistics */
+.summary-stats {
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.stat-card-primary::before {
+  background: linear-gradient(90deg, #0066CC, #0052A3);
+}
+
+.stat-card-success::before {
+  background: linear-gradient(90deg, #28A745, #218838);
+}
+
+.stat-card-warning::before {
+  background: linear-gradient(90deg, #FFC107, #E0A800);
+}
+
+.stat-card-info::before {
+  background: linear-gradient(90deg, #4ECDC4, #3DB3AA);
+}
+
+.stat-card .ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.stat-card .ant-statistic-content {
+  font-size: 28px;
+}
+
+.stat-card .anticon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+/* Top Performer Card */
+.top-performer-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border: none;
+}
+
+.top-performer-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.trophy-icon {
+  font-size: 48px;
+  color: white;
+}
+
+.top-performer-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.top-performer-value {
+  font-size: 24px;
+  color: white;
+  font-weight: 700;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Empty State */
+.empty-state-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 80px;
+  color: #d9d9d9;
+  margin-bottom: 24px;
+}
+
+.empty-state h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .purchase-report-page {
+    padding: 16px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .page-description {
+    font-size: 14px;
+  }
+
+  .stat-card .ant-statistic-content {
+    font-size: 24px;
+  }
+
+  .top-performer-content {
+    gap: 12px;
+  }
+
+  .trophy-icon {
+    font-size: 36px;
+  }
+
+  .top-performer-value {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header Space {
+    width: 100%;
+  }
+
+  .page-header .ant-btn {
+    flex: 1;
+  }
+}
+
+/* Export Buttons */
+.page-header .ant-btn {
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-header .ant-btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+}
+
+.page-header .ant-btn:disabled {
+  opacity: 0.5;
+}

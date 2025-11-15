@@ -1,0 +1,71 @@
+.report-table-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.report-table-card .ant-card-head {
+  background: linear-gradient(135deg, #28A745 0%, #218838 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.report-table-card .ant-card-head-title {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.report-table {
+  font-size: 14px;
+}
+
+.report-table .ant-table-thead > tr > th {
+  background: #F8F9FA;
+  color: #333;
+  font-weight: 600;
+  border-bottom: 2px solid #0066CC;
+}
+
+.report-table .ant-table-tbody > tr:hover > td {
+  background: #F0F7FF !important;
+}
+
+.report-table .ant-table-cell {
+  padding: 16px;
+}
+
+.report-table .ant-tag {
+  margin: 0;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.report-table .ant-pagination {
+  margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+  .report-table .ant-table-cell {
+    padding: 12px 8px;
+  }
+
+  .report-table {
+    font-size: 13px;
+  }
+}
+
+/* Responsive table styles */
+.report-table .ant-table-wrapper {
+  overflow-x: auto;
+}
+
+.report-table-card .ant-card-body {
+  padding: 24px;
+}
+
+@media (max-width: 576px) {
+  .report-table-card .ant-card-body {
+    padding: 16px;
+  }
+}

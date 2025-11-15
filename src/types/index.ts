@@ -38,5 +38,5 @@ export interface Message {
   status: 'sent' | 'delivered' | 'read';
 }
 
-
-
+// Re-export analytics types
+export * from './analytics.types';

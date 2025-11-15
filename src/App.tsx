@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { ConfigProvider, App as AntApp, Spin } from 'antd';
 import { useAuthStore } from '@/stores/authStore';
 import MainLayout from '@/components/layout/MainLayout';
-import { LoginPage, DashboardPage, ClassesPage, ClassDetailPage, MessagingPage, ContentPage, AnalyticsPage, InboxPage, ProfilePage } from '@/config/routes';
+import { LoginPage, DashboardPage, ClassesPage, ClassDetailPage, MessagingPage, ContentPage, AnalyticsPage, PurchaseReportPage, InboxPage, ProfilePage } from '@/config/routes';
 
 // Loading component
 const Loading = () => (
@@ -77,6 +77,7 @@ function App() {
                 <Route path="/messaging" element={<MessagingPage />} />
                 <Route path="/content" element={<ContentPage />} />
                 <Route path="/analytics" element={<AnalyticsPage />} />
+                <Route path="/analytics/purchases" element={<PurchaseReportPage />} />
                 <Route path="/inbox" element={<InboxPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />

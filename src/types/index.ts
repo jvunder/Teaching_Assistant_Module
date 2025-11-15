@@ -38,5 +38,10 @@ export interface Message {
   status: 'sent' | 'delivered' | 'read';
 }
 
-
+// Export all types from specialized modules
+export * from './parent.types';
+export * from './ta.types';
+export * from './analytics.types';
+export * from './course.types';
+export * from './learner.types';
 

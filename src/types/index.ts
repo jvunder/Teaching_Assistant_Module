@@ -1,3 +1,9 @@
+/**
+ * Types Index - Teaching Assistant Module
+ *
+ * Central export point for all TypeScript type definitions
+ */
+
 // API Types
 export interface ApiResponse<T> {
   success: boolean;
@@ -6,37 +12,35 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
-// User Types
-export interface User {
-  id: string;
-  email: string;
-  fullName: string;
-  role: 'teacher' | 'assistant' | 'admin';
-  avatarUrl?: string;
-  phone?: string;
+// Re-export all types from individual modules
+export * from './ta.types';
+export * from './class.types';
+export * from './parent.types';
+export * from './learner.types';
+export * from './messaging.types';
+export * from './content.types';
+
+// Common utility types
+export type Status = 'active' | 'inactive' | 'archived';
+export type Language = 'vi' | 'en' | 'zh';
+export type CommunicationMethod = 'email' | 'sms' | 'app';
+
+// Pagination types
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
 }
 
-// Class Types
-export interface Class {
-  id: string;
-  name: string;
-  grade: string;
-  subject: string;
-  schoolId: string;
-  teacherId: string;
-  studentCount: number;
-  parentCount: number;
+export interface PaginatedResponse<T> {
+  success: boolean;
+  data: {
+    items: T[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+  message?: string;
 }
-
-// Message Types
-export interface Message {
-  id: string;
-  to: string[];
-  content: string;
-  type: 'text' | 'image' | 'video';
-  sentAt: string;
-  status: 'sent' | 'delivered' | 'read';
-}
-
-
-

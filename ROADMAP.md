@@ -1,8 +1,11 @@
 # 🗺️ ROADMAP HOÀN CHỈNH - TEACHING ASSISTANT MODULE
 
 **Dự án:** Vietnam EduCenter V1 - Teaching Assistant Frontend
+
 **Timeline:** 3-4 tuần (17-21 ngày)
+
 **Local Folder:** `C:\Users\abc\OneDrive\TrungTamGiaoDucGiaDinhVN\Teaching_Assistant_Module\`
+
 **Git Branch:** `claude/read-documentation-01Np4Xq1d7Tr2gBvj8ozRAoV`
 
 ---
@@ -18,579 +21,350 @@
 | **2C** | Content & Upload Services | 3 | ~500 | 1 ngày | Thread 5 |
 | **2D** | Remaining Services | 3 | ~450 | 1 ngày | Thread 6 |
 | **3A** | Dashboard Components | 4 | ~1,100 | 1 ngày | Thread 7 |
-| **3B** | Communication Components | 4 | ~900 | 1 ngày | Thread 8 |
-| **3C** | Utility Components | 3 | ~280 | 1 ngày | Thread 9 |
+| **3B** | Communication Components | 3 | ~600 | 1 ngày | Thread 8 |
+| **3C** | Utility Components | 4 | ~380 | 1 ngày | Thread 9 |
 | **4** | Upload Features | - | ~400 | 1 ngày | Thread 10 |
-| **5** | Purchase Reports | 4 | ~600 | 1 ngày | Thread 11 |
-| **6** | Inbox/Support | 3 | ~500 | 1 ngày | Thread 12 |
+| **5** | Purchase Reports | 4 | ~500 | 1 ngày | Thread 11 |
+| **6** | Inbox/Support | 3 | ~400 | 1 ngày | Thread 12 |
 | **7** | Profile Page | 1 | ~300 | 1 ngày | Thread 13 |
-| **8** | Testing & Fixes | - | ~500 | 2 ngày | Thread 14 |
+| **8** | Testing & Fixes | - | - | 2-3 ngày | Thread 14 |
 | **9** | Documentation | 3 | ~800 | 1 ngày | Thread 15 |
 | **10** | Deployment | - | - | 1 ngày | Thread 16 |
 
-**Tổng:** 16 threads, ~10,700 dòng code, 17-21 ngày
+**TỔNG:** 16 threads, ~10,700 dòng code, 17-21 ngày
 
 ---
 
 ## 📋 CHI TIẾT TỪNG PHASE
 
-### ✅ PHASE 0: PLANNING & DOCUMENTATION (Thread 1 - DONE)
+### ✅ PHASE 0: PLANNING & DOCUMENTATION (Thread 1) - DONE
 
-**Status:** ✅ Hoàn thành
-**Files created:**
+**Mục tiêu:** Chuẩn bị tài liệu và kế hoạch chi tiết
+
+**Files đã tạo:**
 - ✅ `IMPLEMENTATION_PLAN.md` (1,156 dòng)
-- ✅ `docs/API_REQUIREMENTS.md` (1,295 dòng)
-- ✅ `SUMMARY_PHASE_0.md` (380 dòng)
-
-**Git:**
-- ✅ Committed & Pushed
-- ✅ Branch: `claude/read-documentation-01Np4Xq1d7Tr2gBvj8ozRAoV`
+- ✅ `docs/API_REQUIREMENTS.md` (1,500+ dòng)
+- ✅ `SUMMARY_PHASE_0.md` (381 dòng)
+- ✅ `ROADMAP.md` (file này)
+- ✅ `PROMPTS.md` (862 dòng)
+- ✅ `QUICK_START.md` (345 dòng)
 
 **Deliverables:**
-- Kế hoạch chi tiết 10 phases
-- API requirements cho Đội A
-- Tóm tắt phân tích code
+- ✅ Kế hoạch 10 phases chi tiết
+- ✅ API requirements cho Đội A
+- ✅ 16 prompt templates sẵn
+- ✅ Roadmap tổng quan
 
 ---
 
 ### 📝 PHASE 1: TYPE DEFINITIONS (Thread 2)
 
-**Mục tiêu:** Tạo đầy đủ TypeScript types cho toàn bộ hệ thống
+**Mục tiêu:** Định nghĩa đầy đủ TypeScript types
 
-**Files cần tạo:** 8 files, ~1,750 dòng
+**Files cần tạo:**
+1. `/src/types/messaging.types.ts` (~200 dòng)
+2. `/src/types/class.types.ts` (~250 dòng)
+3. `/src/types/parent.types.ts` (~200 dòng)
+4. `/src/types/content.types.ts` (~300 dòng)
+5. `/src/types/ta.types.ts` (~250 dòng)
+6. `/src/types/learner.types.ts` (~250 dòng)
+7. `/src/types/analytics.types.ts` (~150 dòng) - NEW
+8. `/src/types/survey.types.ts` (~150 dòng) - NEW
 
-```
-src/types/
-├── messaging.types.ts      (~200 dòng)
-├── class.types.ts          (~250 dòng)
-├── parent.types.ts         (~200 dòng)
-├── content.types.ts        (~300 dòng)
-├── ta.types.ts             (~250 dòng)
-├── learner.types.ts        (~250 dòng)
-├── analytics.types.ts      (~150 dòng)
-├── survey.types.ts         (~150 dòng)
-└── index.ts                (update exports)
-```
+**Tổng:** 8 files, ~1,750 dòng
+
+**Dependencies:** Không có
 
 **Checklist:**
-- [ ] messaging.types.ts (Message, Template, Quota, Conversation)
-- [ ] class.types.ts (Class, Student, Stats, Performance)
-- [ ] parent.types.ts (Parent, Segment, Activity, Filter)
-- [ ] content.types.ts (Video, Article, MicroCourse, Analytics)
-- [ ] ta.types.ts (Profile, Dashboard, KPIs, Performance)
-- [ ] learner.types.ts (Course, Enrollment, Points, Certificate)
-- [ ] analytics.types.ts (Reports, Purchase, Export)
-- [ ] survey.types.ts (Survey, Question, Response)
-- [ ] Update index.ts to export all types
-- [ ] Test imports trong các files khác
-- [ ] Git commit & push
-
-**Estimated time:** 1-2 ngày
-**Dependencies:** None
-**Blocked by:** None
+- [ ] messaging.types.ts
+- [ ] class.types.ts
+- [ ] parent.types.ts
+- [ ] content.types.ts
+- [ ] ta.types.ts
+- [ ] learner.types.ts
+- [ ] analytics.types.ts
+- [ ] survey.types.ts
+- [ ] Update `/src/types/index.ts`
 
 ---
 
 ### 🔌 PHASE 2A: CORE SERVICES (Thread 3)
 
-**Mục tiêu:** Implement Auth & Class services
+**Mục tiêu:** Auth và Class services
 
-**Files cần tạo:** 2 files, ~350 dòng
+**Files cần tạo:**
+1. `/src/services/auth.service.ts` (~150 dòng)
+2. `/src/services/class.service.ts` (~200 dòng)
 
-```
-src/services/
-├── auth.service.ts         (~150 dòng)
-└── class.service.ts        (~200 dòng)
-```
+**Tổng:** 2 files, ~350 dòng
+
+**Dependencies:** Phase 1 (types)
 
 **Checklist:**
 - [ ] auth.service.ts
-  - [ ] login()
-  - [ ] logout()
-  - [ ] refreshToken()
-  - [ ] getCurrentUser()
-  - [ ] updatePassword()
 - [ ] class.service.ts
-  - [ ] getClasses()
-  - [ ] getClassDetail()
-  - [ ] getParents()
-  - [ ] approveParent()
-  - [ ] getClassStats()
-- [ ] Test với mock data
+- [ ] Test với mock server
 - [ ] Error handling
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 1 (Types)
-**Blocked by:** Backend API (dùng mock nếu chưa có)
 
 ---
 
 ### 🔌 PHASE 2B: MESSAGING SERVICE (Thread 4)
 
-**Mục tiêu:** Implement Messaging service (phức tạp nhất)
+**Mục tiêu:** Messaging service đầy đủ
 
-**Files cần tạo:** 1 file, ~350 dòng
+**Files cần tạo:**
+1. `/src/services/messaging.service.ts` (~350 dòng)
 
-```
-src/services/
-└── messaging.service.ts    (~350 dòng)
-```
+**Tổng:** 1 file, ~350 dòng
+
+**Dependencies:** Phase 1 (types), Phase 2A
 
 **Checklist:**
-- [ ] sendMessage()
-- [ ] getMessages()
-- [ ] getMessageDetail()
-- [ ] scheduleMessage()
-- [ ] cancelScheduledMessage()
-- [ ] getMessageStats()
-- [ ] getQuota()
-- [ ] getTemplates()
-- [ ] filterRecipients()
-- [ ] getConversations()
-- [ ] getConversationMessages()
-- [ ] sendConversationMessage()
-- [ ] Test với mock data
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 1 (Types), Phase 2A
-**Blocked by:** Backend API (dùng mock)
+- [ ] messaging.service.ts
+- [ ] Test tất cả endpoints
+- [ ] Quota handling
+- [ ] Template support
 
 ---
 
 ### 🔌 PHASE 2C: CONTENT & UPLOAD SERVICES (Thread 5)
 
-**Mục tiêu:** Implement Content & Upload services
+**Mục tiêu:** Content và Upload services
 
-**Files cần tạo:** 3 files, ~500 dòng
+**Files cần tạo:**
+1. `/src/services/content.service.ts` (~250 dòng)
+2. `/src/services/upload.service.ts` (~150 dòng)
+3. Update `/src/services/api.ts` (~100 dòng)
 
-```
-src/services/
-├── content.service.ts      (~250 dòng)
-├── upload.service.ts       (~150 dòng)
-└── learner.service.ts      (~100 dòng)
-```
+**Tổng:** 3 files, ~500 dòng
+
+**Dependencies:** Phase 1 (types), Phase 2A
 
 **Checklist:**
 - [ ] content.service.ts
-  - [ ] getContents()
-  - [ ] getContentDetail()
-  - [ ] uploadVideo()
-  - [ ] createArticle()
-  - [ ] updateContent()
-  - [ ] deleteContent()
-  - [ ] publishContent()
-  - [ ] getContentAnalytics()
-  - [ ] getCategories()
 - [ ] upload.service.ts
-  - [ ] uploadImage()
-  - [ ] uploadVideo() với progress
-  - [ ] uploadFile()
-  - [ ] deleteUpload()
-- [ ] learner.service.ts
-  - [ ] getCourses()
-  - [ ] getCourseDetail()
-  - [ ] getRecommendations()
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 1, 2A, 2B
+- [ ] Update api.ts
+- [ ] Test upload progress
 
 ---
 
 ### 🔌 PHASE 2D: REMAINING SERVICES (Thread 6)
 
-**Mục tiêu:** Hoàn tất các services còn lại
+**Mục tiêu:** Các services còn lại
 
-**Files cần tạo:** 3 files, ~450 dòng
+**Files cần tạo:**
+1. `/src/services/parent.service.ts` (~150 dòng)
+2. `/src/services/ta.service.ts` (~200 dòng)
+3. `/src/services/analytics.service.ts` (~200 dòng) - NEW
+4. `/src/services/learner.service.ts` (~100 dòng)
 
-```
-src/services/
-├── parent.service.ts       (~150 dòng)
-├── ta.service.ts           (~200 dòng)
-└── analytics.service.ts    (~100 dòng)
-```
+**Tổng:** 4 files, ~650 dòng
+
+**Dependencies:** Phase 1 (types), Phase 2A
 
 **Checklist:**
 - [ ] parent.service.ts
-  - [ ] getParentDetail()
-  - [ ] getParentActivities()
-  - [ ] getParentSegmentStats()
-  - [ ] filterParents()
 - [ ] ta.service.ts
-  - [ ] getProfile()
-  - [ ] updateProfile()
-  - [ ] getDashboard()
-  - [ ] getPerformance()
-  - [ ] getSettings()
-  - [ ] updateSettings()
-  - [ ] getActivities()
-  - [ ] markAlertRead()
 - [ ] analytics.service.ts
-  - [ ] getPurchaseReports()
-  - [ ] getPurchaseDetails()
-  - [ ] exportReport()
-  - [ ] getDashboardAnalytics()
-- [ ] Integration test tất cả services
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 1, 2A, 2B, 2C
-**Deliverable:** Tất cả 9 services hoàn thành
+- [ ] learner.service.ts
+- [ ] Integration test
 
 ---
 
 ### 🎨 PHASE 3A: DASHBOARD COMPONENTS (Thread 7)
 
-**Mục tiêu:** Tạo core dashboard components
+**Mục tiêu:** Core dashboard components
 
-**Files cần tạo:** 4 files, ~1,100 dòng
+**Files cần tạo:**
+1. `/src/components/ta-dashboard/TADashboard.tsx` (~300 dòng)
+2. `/src/components/ta-dashboard/MessageComposer.tsx` (~400 dòng)
+3. `/src/components/ta-dashboard/ParentListTable.tsx` (~350 dòng)
+4. `/src/components/ta-dashboard/PerformanceMetrics.tsx` (~250 dòng)
 
-```
-src/components/ta-dashboard/
-├── TADashboard.tsx         (~300 dòng)
-├── MessageComposer.tsx     (~400 dòng)
-├── ParentListTable.tsx     (~350 dòng)
-└── PerformanceMetrics.tsx  (~250 dòng)
-```
+**Tổng:** 4 files, ~1,300 dòng
+
+**Dependencies:** Phase 2 (services), Phase 1 (types)
 
 **Checklist:**
-- [ ] TADashboard.tsx
-  - [ ] KPIs display
-  - [ ] Parent segmentation
-  - [ ] Recent activities
-  - [ ] Class performance
-  - [ ] Upcoming tasks
-  - [ ] Alerts
-- [ ] MessageComposer.tsx
-  - [ ] Rich text editor
-  - [ ] Template selector
-  - [ ] Attachment upload
-  - [ ] Recipient filter
-  - [ ] Schedule picker
-  - [ ] Preview
-  - [ ] Anti-spam warning
-- [ ] ParentListTable.tsx
-  - [ ] Advanced filters
-  - [ ] Multi-select
-  - [ ] Export Excel
-  - [ ] Quick actions
-  - [ ] Pagination & search
-- [ ] PerformanceMetrics.tsx
-  - [ ] Delivery/read rates
-  - [ ] Response time
-  - [ ] Conversion rates
-  - [ ] Trend charts
-- [ ] CSS styling cho tất cả
-- [ ] Git commit & push
-
-**Estimated time:** 1-2 ngày
-**Dependencies:** Phase 1, 2A-2D
+- [ ] TADashboard.tsx + CSS
+- [ ] MessageComposer.tsx + CSS
+- [ ] ParentListTable.tsx + CSS
+- [ ] PerformanceMetrics.tsx + CSS
+- [ ] Responsive design
 
 ---
 
 ### 🎨 PHASE 3B: COMMUNICATION COMPONENTS (Thread 8)
 
-**Mục tiêu:** Tạo messaging & communication components
+**Mục tiêu:** Communication components
 
-**Files cần tạo:** 4 files, ~900 dòng
+**Files cần tạo:**
+1. `/src/components/ta-dashboard/ParentCommunication.tsx` (~300 dòng)
+2. `/src/components/ta-dashboard/MessagePanel.tsx` (~200 dòng)
+3. `/src/components/ta-dashboard/ParentCard.tsx` (~150 dòng)
 
-```
-src/components/ta-dashboard/
-├── ParentCard.tsx          (~150 dòng)
-├── MessagePanel.tsx        (~200 dòng)
-├── ParentCommunication.tsx (~300 dòng)
-└── QuotaLimitModal.tsx     (~100 dòng)
-```
+**Tổng:** 3 files, ~650 dòng
+
+**Dependencies:** Phase 2B (messaging), Phase 3A
 
 **Checklist:**
-- [ ] ParentCard.tsx
-  - [ ] Avatar, name, contact
-  - [ ] Segment badge
-  - [ ] Learning progress
-  - [ ] Quick actions
-- [ ] MessagePanel.tsx
-  - [ ] Message list với preview
-  - [ ] Status badges
-  - [ ] Filter by status/type
-  - [ ] Search
-- [ ] ParentCommunication.tsx
-  - [ ] Chat interface
-  - [ ] Message history
-  - [ ] Send text/image
-  - [ ] Real-time updates (optional)
-- [ ] QuotaLimitModal.tsx
-  - [ ] Display quota usage
-  - [ ] Progress bars
-  - [ ] Warning messages
-  - [ ] Suggest splitting
-- [ ] CSS styling
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 1, 2A-2D, 3A
+- [ ] ParentCommunication.tsx + CSS
+- [ ] MessagePanel.tsx + CSS
+- [ ] ParentCard.tsx + CSS
+- [ ] Real-time updates (optional)
 
 ---
 
 ### 🎨 PHASE 3C: UTILITY COMPONENTS (Thread 9)
 
-**Mục tiêu:** Tạo các utility components
+**Mục tiêu:** Utility components
 
-**Files cần tạo:** 3 files, ~280 dòng
+**Files cần tạo:**
+1. `/src/components/ta-dashboard/QuotaLimitModal.tsx` (~100 dòng)
+2. `/src/components/ta-dashboard/CircularProgress.tsx` (~80 dòng)
+3. `/src/components/ta-dashboard/TALineChart.tsx` (~100 dòng)
+4. `/src/components/ta-dashboard/TAHeader.tsx` (~80 dòng)
 
-```
-src/components/ta-dashboard/
-├── CircularProgress.tsx    (~80 dòng)
-├── TALineChart.tsx         (~100 dòng)
-└── TAHeader.tsx            (~80 dòng)
-```
+**Tổng:** 4 files, ~360 dòng
+
+**Dependencies:** Phase 2B, Phase 3A
 
 **Checklist:**
-- [ ] CircularProgress.tsx
-  - [ ] Animated circular progress
-  - [ ] Custom colors
-  - [ ] Label inside
-- [ ] TALineChart.tsx
-  - [ ] Responsive line chart
-  - [ ] Tooltip
-  - [ ] Legend
-  - [ ] Custom colors
-- [ ] TAHeader.tsx
-  - [ ] Page title
-  - [ ] Breadcrumb
-  - [ ] Action buttons area
-- [ ] CSS styling
-- [ ] Test tất cả components
-- [ ] Git commit & push
-
-**Estimated time:** 0.5 ngày
-**Dependencies:** Phase 1, 2A-2D, 3A, 3B
-**Deliverable:** Tất cả 11 TA components hoàn thành
+- [ ] QuotaLimitModal.tsx + CSS
+- [ ] CircularProgress.tsx + CSS
+- [ ] TALineChart.tsx + CSS
+- [ ] TAHeader.tsx + CSS
 
 ---
 
 ### 📤 PHASE 4: UPLOAD FEATURES (Thread 10)
 
-**Mục tiêu:** Tích hợp upload file vào các components
+**Mục tiêu:** Hoàn thiện upload features
 
 **Files cần update:**
-```
-- MessageComposer.tsx (update)
-- ContentPage/index.tsx (update)
-- UploadManager.tsx (new, ~150 dòng)
-```
+- Update `MessageComposer.tsx`
+- Update `ContentPage`
+- Create `UploadManager.tsx` (optional)
+
+**Tổng:** ~400 dòng code
+
+**Dependencies:** Phase 2C, Phase 3A
 
 **Checklist:**
-- [ ] Update MessageComposer
-  - [ ] Add image upload
-  - [ ] Add video upload
-  - [ ] Add file upload
-  - [ ] Show upload progress
-  - [ ] Preview uploaded
-  - [ ] Delete uploaded
-- [ ] Update ContentPage
-  - [ ] Drag & drop
-  - [ ] Multiple files
-  - [ ] Thumbnail auto-gen
-  - [ ] Progress bar
-- [ ] Create UploadManager
-  - [ ] Global upload queue
-  - [ ] Pause/Resume
-  - [ ] Retry failed
-- [ ] Test upload flow
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 2C (upload.service), Phase 3A-3C
+- [ ] Image upload trong MessageComposer
+- [ ] Video upload với progress
+- [ ] Drag & drop
+- [ ] File validation
+- [ ] Upload queue manager
 
 ---
 
 ### 📊 PHASE 5: PURCHASE REPORTS (Thread 11)
 
-**Mục tiêu:** Implement báo cáo đặt mua đa chiều
+**Mục tiêu:** Báo cáo đặt mua đa chiều
 
-**Files cần tạo:** 4 files, ~600 dòng
+**Files cần tạo:**
+1. `/src/pages/PurchaseReportPage/index.tsx` (~200 dòng)
+2. `/src/components/analytics/ReportBuilder.tsx` (~150 dòng)
+3. `/src/components/analytics/ReportTable.tsx` (~100 dòng)
+4. `/src/components/analytics/ReportChart.tsx` (~100 dòng)
 
-```
-src/pages/PurchaseReportPage/
-├── index.tsx               (~200 dòng)
-└── PurchaseReportPage.css  (~50 dòng)
+**Tổng:** 4 files, ~550 dòng
 
-src/components/analytics/
-├── ReportBuilder.tsx       (~150 dòng)
-├── ReportTable.tsx         (~150 dòng)
-└── ReportChart.tsx         (~100 dòng)
-```
+**Dependencies:** Phase 2D (analytics service), Phase 1 (types)
 
 **Checklist:**
 - [ ] PurchaseReportPage
-  - [ ] Dimension selector
-  - [ ] Date range picker
-  - [ ] Filter by course type
-  - [ ] Summary stats
-  - [ ] Detailed table
-  - [ ] Chart visualization
-  - [ ] Export Excel/PDF
-- [ ] ReportBuilder
-  - [ ] Filter builder UI
-  - [ ] Preview results
-- [ ] ReportTable
-  - [ ] Expandable rows
-  - [ ] Sorting
-  - [ ] Export
-- [ ] ReportChart
-  - [ ] Bar chart
-  - [ ] Pie chart
-  - [ ] Line chart
-- [ ] Add route `/analytics/purchases`
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 2D (analytics.service)
+- [ ] ReportBuilder component
+- [ ] ReportTable component
+- [ ] ReportChart component
+- [ ] Export Excel/PDF
 
 ---
 
-### 📨 PHASE 6: INBOX/SUPPORT SYSTEM (Thread 12)
+### 📨 PHASE 6: INBOX/SUPPORT (Thread 12)
 
-**Mục tiêu:** Hoàn thiện Inbox/Support
+**Mục tiêu:** Hoàn thiện inbox/support system
 
-**Files cần update/create:** 3 files, ~500 dòng
+**Files cần tạo:**
+1. Update `/src/pages/InboxPage/index.tsx` (~200 dòng)
+2. `/src/components/inbox/TicketList.tsx` (~100 dòng)
+3. `/src/components/inbox/TicketDetail.tsx` (~100 dòng)
 
-```
-src/pages/InboxPage/index.tsx (update ~200 dòng)
+**Tổng:** 3 files, ~400 dòng
 
-src/components/inbox/
-├── TicketList.tsx          (~150 dòng)
-├── TicketDetail.tsx        (~150 dòng)
-└── CannedResponseSelector.tsx (~100 dòng)
-```
+**Dependencies:** Phase 2B, Phase 3B
 
 **Checklist:**
-- [ ] Update InboxPage
-  - [ ] Ticket list
-  - [ ] Ticket detail
-  - [ ] Reply
-  - [ ] Status management
-- [ ] TicketList
-  - [ ] Filter by status
-  - [ ] Search
-  - [ ] Pagination
-- [ ] TicketDetail
-  - [ ] Message thread
-  - [ ] Attachments
-  - [ ] Actions
-- [ ] CannedResponseSelector
-  - [ ] Template list
-  - [ ] Insert template
-  - [ ] Custom variables
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 2A-2D
+- [ ] Ticket list
+- [ ] Ticket detail
+- [ ] Reply functionality
+- [ ] Canned responses
+- [ ] SLA tracking
 
 ---
 
 ### 👤 PHASE 7: PROFILE PAGE (Thread 13)
 
-**Mục tiêu:** Hoàn thiện ProfilePage
+**Mục tiêu:** Hoàn thiện profile page
 
-**Files cần update:** 1 file, ~300 dòng
+**Files cần tạo:**
+1. Update `/src/pages/ProfilePage/index.tsx` (~300 dòng)
 
-```
-src/pages/ProfilePage/index.tsx (update ~300 dòng)
-```
+**Tổng:** 1 file, ~300 dòng
+
+**Dependencies:** Phase 2D (ta service), Phase 2C (upload)
 
 **Checklist:**
-- [ ] View profile info
-- [ ] Edit profile form
+- [ ] View profile
+- [ ] Edit profile
 - [ ] Change password
 - [ ] Upload avatar
-- [ ] View assigned classes
-- [ ] View performance metrics
 - [ ] Settings
-  - [ ] Email notifications
-  - [ ] Language
-  - [ ] Timezone
-- [ ] Test update flow
-- [ ] Git commit & push
-
-**Estimated time:** 0.5-1 ngày
-**Dependencies:** Phase 2D (ta.service)
 
 ---
 
-### 🧪 PHASE 8: TESTING & BUG FIXES (Thread 14)
+### 🧪 PHASE 8: TESTING & FIXES (Thread 14)
 
-**Mục tiêu:** Test toàn bộ hệ thống và fix bugs
+**Mục tiêu:** Testing và bug fixes
 
-**Không tạo files mới, chỉ fix bugs**
+**Tasks:**
+- Unit testing
+- Integration testing
+- Manual testing
+- Bug fixes
+- Performance optimization
+
+**Dependencies:** Tất cả phases trước
 
 **Checklist:**
-- [ ] Unit testing
-  - [ ] Test all services
-  - [ ] Test critical components
-- [ ] Integration testing
-  - [ ] Test API integration
-  - [ ] Test user flows
-  - [ ] Test edge cases
+- [ ] Unit tests
+- [ ] Integration tests
 - [ ] Manual testing
-  - [ ] Test all features
-  - [ ] Cross-browser (Chrome, Firefox, Edge)
-  - [ ] Responsive (Desktop, Tablet)
+- [ ] Cross-browser testing
 - [ ] Bug fixes
-  - [ ] Fix critical bugs
-  - [ ] Fix UI/UX issues
-  - [ ] Performance optimization
-- [ ] Accessibility
-  - [ ] Keyboard navigation
-  - [ ] Screen reader
-  - [ ] WCAG AA compliance
-- [ ] Git commit & push fixes
-
-**Estimated time:** 2-3 ngày
-**Dependencies:** Phase 1-7 (ALL)
+- [ ] Performance optimization
 
 ---
 
 ### 📚 PHASE 9: DOCUMENTATION (Thread 15)
 
-**Mục tiêu:** Viết documentation đầy đủ
+**Mục tiêu:** Hoàn thiện documentation
 
-**Files cần tạo:** 3 files, ~800 dòng
+**Files cần tạo:**
+1. Update `/docs/API_REQUIREMENTS.md`
+2. `/docs/DEVELOPER_GUIDE.md` (~400 dòng)
+3. `/docs/USER_GUIDE.md` (~400 dòng)
 
-```
-docs/
-├── DEVELOPER_GUIDE.md      (~300 dòng)
-├── USER_GUIDE.md           (~300 dòng)
-└── DEPLOYMENT_GUIDE.md     (~200 dòng)
-```
+**Tổng:** 3 files, ~800 dòng
+
+**Dependencies:** Tất cả phases
 
 **Checklist:**
-- [ ] DEVELOPER_GUIDE.md
-  - [ ] Setup instructions
-  - [ ] Project structure
-  - [ ] Coding conventions
-  - [ ] Component guide
-  - [ ] API integration guide
-  - [ ] Troubleshooting
-- [ ] USER_GUIDE.md
-  - [ ] Feature descriptions
-  - [ ] Screenshots
-  - [ ] Usage instructions
-  - [ ] FAQs
-- [ ] DEPLOYMENT_GUIDE.md
-  - [ ] Build instructions
-  - [ ] Environment setup
-  - [ ] VPS deployment
-  - [ ] Nginx config
-  - [ ] SSL setup
-  - [ ] CI/CD
-- [ ] Update README.md
-- [ ] Git commit & push
-
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 1-8 (ALL)
+- [ ] API requirements update
+- [ ] Developer guide
+- [ ] User guide
+- [ ] Code comments
 
 ---
 
@@ -598,116 +372,106 @@ docs/
 
 **Mục tiêu:** Deploy lên production
 
-**Không tạo files code, chỉ deployment**
+**Tasks:**
+- Environment setup
+- Build production
+- VPS configuration
+- Deploy
+- CI/CD setup
+
+**Dependencies:** Phase 9
 
 **Checklist:**
-- [ ] Preparation
-  - [ ] Environment variables
-  - [ ] Build production
-  - [ ] Test production build
-- [ ] Vietnam VPS Setup
-  - [ ] SSH access
-  - [ ] Install Node.js
-  - [ ] Install Nginx
-  - [ ] SSL certificate
-  - [ ] Domain setup
+- [ ] Environment variables
+- [ ] Production build
+- [ ] VPS setup
+- [ ] Nginx config
+- [ ] SSL certificate
 - [ ] Deploy
-  - [ ] Upload build
-  - [ ] Configure Nginx
-  - [ ] Test production site
-  - [ ] Setup monitoring (Sentry)
 - [ ] CI/CD
-  - [ ] GitHub Actions
-  - [ ] Auto build
-  - [ ] Auto deploy
-- [ ] Handover
-  - [ ] Documentation
-  - [ ] Training
-  - [ ] Support plan
+- [ ] Monitoring
 
-**Estimated time:** 1 ngày
-**Dependencies:** Phase 1-9 (ALL)
-**Deliverable:** 🎉 Production-ready application!
+---
+
+## 📅 TIMELINE TỔNG HỢP
+
+| Week | Days | Phases | Threads |
+|------|------|--------|---------|
+| **Week 1** | 1-6 | Phase 1-2 | Threads 2-6 |
+| **Week 2** | 7-11 | Phase 3 | Threads 7-9 |
+| **Week 3** | 12-16 | Phase 4-7 | Threads 10-13 |
+| **Week 4** | 17-21 | Phase 8-10 | Threads 14-16 |
+
+**Tổng:** 17-21 ngày làm việc
+
+---
+
+## 🚦 DEPENDENCIES
+
+### Critical Dependencies
+1. **Backend API từ Đội A**
+   - Status: ⏳ Chờ
+   - Impact: Blocker cho Phase 2
+   - Mitigation: Dùng mock data
+
+2. **Design System**
+   - Status: ✅ Ant Design
+   - Impact: None
+
+3. **Vietnam VPS**
+   - Status: ⏳ Cần thuê
+   - Impact: Blocker cho Phase 10
+   - Mitigation: Deploy local test trước
 
 ---
 
 ## 📊 PROGRESS TRACKING
 
-### Overall Progress
-```
-Phase 0:  ✅ 100% (DONE)
-Phase 1:  ⬜   0%
-Phase 2A: ⬜   0%
-Phase 2B: ⬜   0%
-Phase 2C: ⬜   0%
-Phase 2D: ⬜   0%
-Phase 3A: ⬜   0%
-Phase 3B: ⬜   0%
-Phase 3C: ⬜   0%
-Phase 4:  ⬜   0%
-Phase 5:  ⬜   0%
-Phase 6:  ⬜   0%
-Phase 7:  ⬜   0%
-Phase 8:  ⬜   0%
-Phase 9:  ⬜   0%
-Phase 10: ⬜   0%
+### Template cho mỗi Thread:
 
-Overall: 6.25% (1/16 phases)
-```
+```markdown
+## Thread X: [Phase Name]
 
-### Code Statistics
-```
-Planned:   ~10,700 dòng code
-Written:   ~2,831 dòng (documentation)
-Remaining: ~7,869 dòng
+**Status:** ⏳ In Progress / ✅ Complete / ❌ Blocked
+
+**Started:** [Date]
+**Completed:** [Date]
+**Time spent:** [Hours]
+
+**Files created:**
+- [ ] file1.ts
+- [ ] file2.ts
+
+**Issues:**
+- Issue 1
+- Issue 2
+
+**Notes:**
+- Note 1
+- Note 2
 ```
 
 ---
 
-## 🔄 GIT WORKFLOW
+## ✅ DEFINITION OF DONE
 
-### Cho mỗi Phase:
-```bash
-# 1. Đảm bảo đang ở đúng branch
-git checkout claude/read-documentation-01Np4Xq1d7Tr2gBvj8ozRAoV
+### Cho mỗi Thread:
+- [ ] Code complete
+- [ ] Tested
+- [ ] No critical bugs
+- [ ] Committed to git
+- [ ] Documentation updated
 
-# 2. Pull code mới nhất
-git pull
-
-# 3. Làm việc...
-
-# 4. Commit
-git add .
-git commit -m "Complete Phase [X]: [Description]"
-
-# 5. Push
-git push
-
-# 6. Update progress trong ROADMAP.md
-```
+### Cho toàn bộ dự án:
+- [ ] Tất cả features hoạt động
+- [ ] API integration hoàn thành
+- [ ] All tests passing
+- [ ] Performance optimized
+- [ ] Documentation complete
+- [ ] Deployed to production
 
 ---
 
-## 📞 CONTACTS & RESOURCES
+**Last Updated:** 15/11/2025  
+**Status:** 🚀 READY FOR PHASE 1
 
-### Team Contacts
-- **Đội A (Backend):** [TBD]
-- **Sếp/PM:** [TBD]
-- **Designer:** [TBD]
-
-### Resources
-- **IMPLEMENTATION_PLAN.md:** Kế hoạch chi tiết
-- **API_REQUIREMENTS.md:** API specs cho Đội A
-- **SUMMARY_PHASE_0.md:** Tóm tắt Phase 0
-
-### Repository
-- **Local:** `C:\Users\abc\OneDrive\TrungTamGiaoDucGiaDinhVN\Teaching_Assistant_Module\`
-- **GitHub:** `https://github.com/jvunder/Teaching_Assistant_Module`
-- **Branch:** `claude/read-documentation-01Np4Xq1d7Tr2gBvj8ozRAoV`
-
----
-
-**Last Updated:** 15/11/2025
-**Current Phase:** Phase 0 ✅ COMPLETE
-**Next Phase:** Phase 1 (Type Definitions)
-**Status:** 🚀 Ready to start Phase 1!

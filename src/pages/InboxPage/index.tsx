@@ -1,111 +1,44 @@
-import { useState, useEffect } from 'react';
-import {
-  Card,
-  Table,
-  Tag,
-  Button,
-  Modal,
-  Form,
-  Input,
-  Select,
-  Space,
-  Tabs,
-  Typography,
-  message,
-  Descriptions,
-  Alert,
-} from 'antd';
-import {
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  SendOutlined,
-} from '@ant-design/icons';
-// ReactQuill temporarily disabled due to React 19 compatibility issues
-// import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
-import type { ColumnsType } from 'antd/es/table';
-import './InboxPage.css';
+import React, { useState, useEffect } from 'react';
+import { Card, Tabs, Statistic, Row, Col, message, Spin } from 'antd';
+import { InboxOutlined, ClockCircleOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import TicketList from '@/components/inbox/TicketList';
+import TicketDetail from '@/components/inbox/TicketDetail';
+import inboxService from '@/services/inbox.service';
+import type { Ticket, TicketFilter, TicketStatus, TicketPriority, TicketCategory } from '@/types/inbox.types';
+import './index.css';
 
-const { Option } = Select;
 const { TabPane } = Tabs;
-const { Title } = Typography;
-const { TextArea } = Input;
 
-interface Ticket {
-  id: string;
-  subject: string;
-  status: 'new' | 'in_progress' | 'resolved';
-  priority: 'low' | 'medium' | 'high';
-  from: string;
-  createdAt: string;
-  lastReply: string;
-  category: string;
-}
-
-const InboxPage = () => {
-  const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
-  const [showDetailModal, setShowDetailModal] = useState(false);
-  const [showReplyModal, setShowReplyModal] = useState(false);
-  const [activeTab, setActiveTab] = useState('new');
-  const [replyForm] = Form.useForm();
+const InboxPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
-
-  // Mock canned responses
-  const cannedResponses = [
-    { id: '1', text: 'Cảm ơn bạn đã liên hệ. Chúng tôi sẽ xử lý yêu cầu của bạn sớm nhất có thể.' },
-    { id: '2', text: 'Vấn đề này đã được ghi nhận và sẽ được chuyển đến bộ phận liên quan.' },
-    { id: '3', text: 'Xin lỗi vì sự bất tiện. Chúng tôi đang xử lý vấn đề này.' },
-  ];
+  const [tickets, setTickets] = useState<Ticket[]>([]);
+  const [filteredTickets, setFilteredTickets] = useState<Ticket[]>([]);
+  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>('all');
+  const [ticketsCount, setTicketsCount] = useState({
+    new: 0,
+    in_progress: 0,
+    resolved: 0,
+    closed: 0,
+    total: 0,
+  });
+  const [filters, setFilters] = useState<TicketFilter>({});
 
   useEffect(() => {
     loadTickets();
-  }, [activeTab]);
+    loadTicketsCount();
+  }, []);
+
+  useEffect(() => {
+    applyFilters();
+  }, [tickets, activeTab, filters]);
 
   const loadTickets = async () => {
     setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      // Mock tickets
-      const mockTickets: Ticket[] = [
-        {
-          id: '1',
-          subject: 'Hỏi về lịch học bù',
-          status: 'new',
-          priority: 'high',
-          from: 'Phụ huynh Nguyễn Văn A',
-          createdAt: '2025-10-30T10:00:00',
-          lastReply: '2025-10-30T10:00:00',
-          category: 'Schedule',
-        },
-        {
-          id: '2',
-          subject: 'Yêu cầu xem điểm kiểm tra',
-          status: 'in_progress',
-          priority: 'medium',
-          from: 'Phụ huynh Trần Thị B',
-          createdAt: '2025-10-29T14:30:00',
-          lastReply: '2025-10-30T09:00:00',
-          category: 'Grade',
-        },
-        {
-          id: '3',
-          subject: 'Phản ánh về bài giảng',
-          status: 'resolved',
-          priority: 'low',
-          from: 'Phụ huynh Lê Văn C',
-          createdAt: '2025-10-28T16:00:00',
-          lastReply: '2025-10-29T11:00:00',
-          category: 'Feedback',
-        },
-      ];
-
-      const filtered =
-        activeTab === 'all'
-          ? mockTickets
-          : mockTickets.filter((t) => t.status === activeTab);
-
-      setTickets(filtered);
+      const data = await inboxService.getTickets();
+      setTickets(data);
     } catch (error) {
       message.error('Không thể tải danh sách ticket');
     } finally {
@@ -113,274 +46,159 @@ const InboxPage = () => {
     }
   };
 
-  const handleViewTicket = (ticket: Ticket) => {
+  const loadTicketsCount = async () => {
+    try {
+      const count = await inboxService.getTicketsCount();
+      setTicketsCount(count);
+    } catch (error) {
+      console.error('Failed to load tickets count:', error);
+    }
+  };
+
+  const applyFilters = () => {
+    let filtered = [...tickets];
+
+    // Apply tab filter
+    if (activeTab !== 'all') {
+      filtered = filtered.filter((t) => t.status === activeTab);
+    }
+
+    // Apply other filters
+    if (filters.status) {
+      filtered = filtered.filter((t) => t.status === filters.status);
+    }
+    if (filters.priority) {
+      filtered = filtered.filter((t) => t.priority === filters.priority);
+    }
+    if (filters.category) {
+      filtered = filtered.filter((t) => t.category === filters.category);
+    }
+    if (filters.searchTerm) {
+      const term = filters.searchTerm.toLowerCase();
+      filtered = filtered.filter(
+        (t) =>
+          t.subject.toLowerCase().includes(term) ||
+          t.content.toLowerCase().includes(term) ||
+          t.from.toLowerCase().includes(term)
+      );
+    }
+
+    setFilteredTickets(filtered);
+  };
+
+  const handleTicketClick = (ticket: Ticket) => {
     setSelectedTicket(ticket);
-    setShowDetailModal(true);
+    setDetailOpen(true);
   };
 
-  const handleReply = () => {
-    setShowReplyModal(true);
+  const handleDetailClose = () => {
+    setDetailOpen(false);
+    setSelectedTicket(null);
   };
 
-  const handleSubmitReply = async () => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      message.success('Phản hồi đã được gửi');
-      setShowReplyModal(false);
-      replyForm.resetFields();
-      loadTickets();
-    } catch (error) {
-      message.error('Gửi phản hồi thất bại');
-    }
+  const handleUpdate = () => {
+    loadTickets();
+    loadTicketsCount();
   };
 
-  const handleTransferToAdmin = async () => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      message.success('Ticket đã được chuyển đến quản trị viên');
-      setShowDetailModal(false);
-      loadTickets();
-    } catch (error) {
-      message.error('Chuyển ticket thất bại');
-    }
+  const handleSearch = (term: string) => {
+    setFilters({ ...filters, searchTerm: term });
   };
 
-  const getStatusTag = (status: string) => {
-    const statusMap: Record<string, { color: string; icon: React.ReactNode; text: string }> = {
-      new: { color: 'blue', icon: <ClockCircleOutlined />, text: 'Mới' },
-      in_progress: { color: 'orange', icon: <ClockCircleOutlined />, text: 'Đang xử lý' },
-      resolved: { color: 'green', icon: <CheckCircleOutlined />, text: 'Đã giải quyết' },
-    };
-    const config = statusMap[status] || statusMap.new;
-    return (
-      <Tag color={config.color} icon={config.icon}>
-        {config.text}
-      </Tag>
-    );
+  const handleFilterChange = (newFilters: {
+    status?: TicketStatus;
+    priority?: TicketPriority;
+    category?: TicketCategory;
+  }) => {
+    setFilters({ ...filters, ...newFilters });
   };
-
-  const getPriorityTag = (priority: string) => {
-    const priorityMap: Record<string, { color: string; text: string }> = {
-      low: { color: 'default', text: 'Thấp' },
-      medium: { color: 'orange', text: 'Trung bình' },
-      high: { color: 'red', text: 'Cao' },
-    };
-    const config = priorityMap[priority] || priorityMap.medium;
-    return <Tag color={config.color}>{config.text}</Tag>;
-  };
-
-  const columns: ColumnsType<Ticket> = [
-    {
-      title: 'Chủ đề',
-      dataIndex: 'subject',
-      key: 'subject',
-      render: (text, record) => (
-        <Button type="link" onClick={() => handleViewTicket(record)}>
-          {text}
-        </Button>
-      ),
-    },
-    {
-      title: 'Người gửi',
-      dataIndex: 'from',
-      key: 'from',
-    },
-    {
-      title: 'Danh mục',
-      dataIndex: 'category',
-      key: 'category',
-      render: (cat: string) => <Tag>{cat}</Tag>,
-    },
-    {
-      title: 'Mức độ ưu tiên',
-      dataIndex: 'priority',
-      key: 'priority',
-      render: getPriorityTag,
-    },
-    {
-      title: 'Trạng thái',
-      dataIndex: 'status',
-      key: 'status',
-      render: getStatusTag,
-    },
-    {
-      title: 'Ngày tạo',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      render: (date: string) => new Date(date).toLocaleDateString('vi-VN'),
-    },
-    {
-      title: 'Thao tác',
-      key: 'action',
-      render: (_, record) => (
-        <Button type="link" onClick={() => handleViewTicket(record)}>
-          Xem chi tiết
-        </Button>
-      ),
-    },
-  ];
 
   return (
-    <div className="wow-page inbox-page">
-      <div className="wow-header inbox-header">
-        <Title level={2}>Hộp thư hỗ trợ</Title>
+    <div className="inbox-page">
+      {/* Page Header */}
+      <div className="inbox-page-header">
+        <div>
+          <h1 className="inbox-page-title">Hộp thư hỗ trợ</h1>
+          <p className="inbox-page-description">Quản lý và phản hồi các yêu cầu hỗ trợ từ phụ huynh</p>
+        </div>
       </div>
 
-      <Card className="wow-card">
-        <Tabs activeKey={activeTab} onChange={setActiveTab}>
-          <TabPane
-            tab={
-              <span>
-                Mới <Tag color="blue">{tickets.filter((t) => t.status === 'new').length}</Tag>
-              </span>
-            }
-            key="new"
-          />
-          <TabPane
-            tab={
-              <span>
-                Đang xử lý{' '}
-                <Tag color="orange">
-                  {tickets.filter((t) => t.status === 'in_progress').length}
-                </Tag>
-              </span>
-            }
-            key="in_progress"
-          />
-          <TabPane
-            tab={
-              <span>
-                Đã giải quyết{' '}
-                <Tag color="green">
-                  {tickets.filter((t) => t.status === 'resolved').length}
-                </Tag>
-              </span>
-            }
-            key="resolved"
-          />
-          <TabPane tab="Tất cả" key="all" />
+      {/* Statistics */}
+      <Row gutter={[16, 16]} className="inbox-stats">
+        <Col xs={24} sm={12} lg={6}>
+          <Card className="stat-card stat-new">
+            <Statistic
+              title="Ticket mới"
+              value={ticketsCount.new}
+              prefix={<InboxOutlined />}
+              valueStyle={{ color: '#1890ff' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <Card className="stat-card stat-in-progress">
+            <Statistic
+              title="Đang xử lý"
+              value={ticketsCount.in_progress}
+              prefix={<ClockCircleOutlined />}
+              valueStyle={{ color: '#faad14' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <Card className="stat-card stat-resolved">
+            <Statistic
+              title="Đã giải quyết"
+              value={ticketsCount.resolved}
+              prefix={<CheckCircleOutlined />}
+              valueStyle={{ color: '#52c41a' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <Card className="stat-card stat-closed">
+            <Statistic
+              title="Đã đóng"
+              value={ticketsCount.closed}
+              prefix={<CloseCircleOutlined />}
+              valueStyle={{ color: '#8c8c8c' }}
+            />
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Tickets Tabs */}
+      <Card className="inbox-tabs-card">
+        <Tabs activeKey={activeTab} onChange={setActiveTab} size="large">
+          <TabPane tab={`Tất cả (${ticketsCount.total})`} key="all" />
+          <TabPane tab={`Mới (${ticketsCount.new})`} key="new" />
+          <TabPane tab={`Đang xử lý (${ticketsCount.in_progress})`} key="in_progress" />
+          <TabPane tab={`Đã giải quyết (${ticketsCount.resolved})`} key="resolved" />
+          <TabPane tab={`Đã đóng (${ticketsCount.closed})`} key="closed" />
         </Tabs>
 
-        <Table
-          className="wow-table"
-          columns={columns}
-          dataSource={tickets}
-          rowKey="id"
-          loading={loading}
-          pagination={{
-            pageSize: 10,
-            showSizeChanger: true,
-            showTotal: (total) => `Tổng ${total} ticket`,
-          }}
-        />
+        {loading ? (
+          <div className="inbox-loading">
+            <Spin size="large" tip="Đang tải tickets..." />
+          </div>
+        ) : (
+          <TicketList
+            tickets={filteredTickets}
+            loading={loading}
+            onTicketClick={handleTicketClick}
+            onSearch={handleSearch}
+            onFilterChange={handleFilterChange}
+          />
+        )}
       </Card>
 
-      {/* Ticket Detail Modal */}
-      <Modal
-        title="Chi tiết ticket"
-        open={showDetailModal}
-        onCancel={() => setShowDetailModal(false)}
-        footer={[
-          <Button key="close" onClick={() => setShowDetailModal(false)}>
-            Đóng
-          </Button>,
-          <Button key="transfer" onClick={handleTransferToAdmin}>
-            Chuyển đến admin
-          </Button>,
-          <Button key="reply" type="primary" className="wow-btn" icon={<SendOutlined />} onClick={handleReply}>
-            Phản hồi
-          </Button>,
-        ]}
-        width={800}
-      >
-        {selectedTicket && (
-          <div>
-            <Descriptions column={1} bordered>
-              <Descriptions.Item label="Chủ đề">
-                {selectedTicket.subject}
-              </Descriptions.Item>
-              <Descriptions.Item label="Người gửi">
-                {selectedTicket.from}
-              </Descriptions.Item>
-              <Descriptions.Item label="Danh mục">
-                <Tag>{selectedTicket.category}</Tag>
-              </Descriptions.Item>
-              <Descriptions.Item label="Mức độ ưu tiên">
-                {getPriorityTag(selectedTicket.priority)}
-              </Descriptions.Item>
-              <Descriptions.Item label="Trạng thái">
-                {getStatusTag(selectedTicket.status)}
-              </Descriptions.Item>
-              <Descriptions.Item label="Ngày tạo">
-                {new Date(selectedTicket.createdAt).toLocaleString('vi-VN')}
-              </Descriptions.Item>
-            </Descriptions>
-
-            <div style={{ marginTop: 24 }}>
-              <Title level={4}>Nội dung tin nhắn</Title>
-              <Alert
-                message="Đây là nội dung tin nhắn từ phụ huynh..."
-                type="info"
-                showIcon
-              />
-            </div>
-          </div>
-        )}
-      </Modal>
-
-      {/* Reply Modal */}
-      <Modal
-        title="Phản hồi ticket"
-        open={showReplyModal}
-        onCancel={() => {
-          setShowReplyModal(false);
-          replyForm.resetFields();
-        }}
-        footer={null}
-        width={700}
-      >
-        <Form form={replyForm} layout="vertical" onFinish={handleSubmitReply}>
-          <Form.Item label="Chọn phản hồi nhanh (tùy chọn)">
-            <Select
-              placeholder="Chọn phản hồi nhanh"
-              onChange={(value) => {
-                const response = cannedResponses.find((r) => r.id === value);
-                if (response) {
-                  replyForm.setFieldsValue({ content: response.text });
-                }
-              }}
-            >
-              {cannedResponses.map((r) => (
-                <Option key={r.id} value={r.id}>
-                  {r.text.substring(0, 50)}...
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            name="content"
-            label="Nội dung phản hồi"
-            rules={[{ required: true, message: 'Vui lòng nhập nội dung' }]}
-          >
-            <TextArea
-              rows={8}
-              placeholder="Nhập nội dung phản hồi..."
-              showCount
-              maxLength={2000}
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Space>
-              <Button type="primary" className="wow-btn" htmlType="submit" icon={<SendOutlined />}>
-                Gửi phản hồi
-              </Button>
-              <Button onClick={() => setShowReplyModal(false)}>Hủy</Button>
-            </Space>
-          </Form.Item>
-        </Form>
-      </Modal>
+      {/* Ticket Detail Drawer */}
+      <TicketDetail
+        ticket={selectedTicket}
+        open={detailOpen}
+        onClose={handleDetailClose}
+        onUpdate={handleUpdate}
+      />
     </div>
   );
 };

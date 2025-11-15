@@ -40,3 +40,6 @@ export interface Message {
 
 // Re-export analytics types
 export * from './analytics.types';
+
+// Re-export inbox types
+export * from './inbox.types';

@@ -43,3 +43,6 @@ export * from './analytics.types';
 
 // Re-export inbox types
 export * from './inbox.types';
+
+// Re-export TA types
+export * from './ta.types';

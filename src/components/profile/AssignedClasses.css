@@ -1,0 +1,81 @@
+.assigned-classes {
+  padding: 16px 0;
+}
+
+.class-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid #0066CC;
+}
+
+.class-card-active {
+  border-left-color: #0066CC;
+}
+
+.class-card-completed {
+  border-left-color: #52c41a;
+}
+
+.class-card-upcoming {
+  border-left-color: #faad14;
+}
+
+.class-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.class-card .ant-card-head {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.class-card .ant-card-head-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.class-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.class-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.class-info-item .anticon {
+  color: #0066CC;
+  font-size: 16px;
+}
+
+.class-info-item .ant-tag {
+  margin: 0;
+}
+
+.class-completed-badge {
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .class-card .ant-card-head-title {
+    font-size: 14px;
+  }
+
+  .class-info-item {
+    font-size: 13px;
+  }
+}

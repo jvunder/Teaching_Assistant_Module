@@ -1,0 +1,161 @@
+.message-composer {
+  padding: 24px;
+}
+
+/* Composer Card */
+.composer-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.composer-card .ant-form-item-label > label {
+  font-weight: 600;
+}
+
+/* Attachment List */
+.attachment-list {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.attachment-list .ant-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.attachment-list .ant-list-item:last-child {
+  border-bottom: none;
+}
+
+.attachment-icon {
+  font-size: 24px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.icon-purple {
+  color: #9b59b6;
+}
+
+.icon-gray {
+  color: #95a5a6;
+}
+
+/* Filter Card */
+.filter-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filter-condition {
+  margin-bottom: 12px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+}
+
+.filter-condition .ant-card-body {
+  padding: 12px;
+}
+
+/* Recipient Count */
+.recipient-count {
+  padding: 16px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+  border-radius: 8px;
+  text-align: center;
+  border: 2px dashed #0066cc;
+}
+
+/* Preview Modal */
+.preview-content {
+  padding: 8px 0;
+}
+
+.preview-info {
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.preview-message {
+  padding: 16px;
+}
+
+.preview-text {
+  margin-top: 8px;
+  padding: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border-left: 4px solid #0066cc;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.preview-attachments {
+  padding: 16px;
+}
+
+.preview-attachments .ant-list-item {
+  padding: 8px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .message-composer {
+    padding: 16px;
+  }
+
+  .filter-card {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .message-composer {
+    padding: 12px;
+  }
+
+  .attachment-icon {
+    font-size: 20px;
+    padding: 6px;
+  }
+
+  .recipient-count {
+    padding: 12px;
+  }
+
+  .preview-text {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Loading State */
+.ant-upload-list-item-uploading {
+  border-color: #0066cc;
+}
+
+/* Buttons */
+.composer-card .ant-btn-primary {
+  min-width: 120px;
+}
+
+/* Form Items */
+.composer-card .ant-form-item {
+  margin-bottom: 20px;
+}
+
+/* Template Select */
+.composer-card .ant-select-item {
+  padding: 8px 12px;
+}
+
+.composer-card .ant-select-item:hover {
+  background: #f0f8ff;
+}

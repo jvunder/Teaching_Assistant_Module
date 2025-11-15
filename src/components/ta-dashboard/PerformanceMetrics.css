@@ -1,0 +1,292 @@
+.performance-metrics {
+  padding: 24px;
+  background: #f5f5f5;
+}
+
+/* Loading State */
+.metrics-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Header */
+.metrics-header {
+  margin-bottom: 24px;
+}
+
+/* Score Card */
+.score-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+  border: 2px solid #e3f2fd;
+}
+
+.score-card .ant-card-body {
+  padding: 32px;
+}
+
+.score-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Metric Cards */
+.metric-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.metric-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.metric-card .ant-card-body {
+  padding: 20px;
+}
+
+.metric-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.metric-change {
+  margin: 12px 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.change-icon-up {
+  color: #28a745;
+  font-size: 16px;
+}
+
+.change-icon-down {
+  color: #dc3545;
+  font-size: 16px;
+}
+
+/* Chart Cards */
+.chart-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.chart-card .ant-card-body {
+  padding: 24px;
+}
+
+.chart-card .recharts-wrapper {
+  margin: 0 auto;
+}
+
+/* Insights Card */
+.insights-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.insights-card .ant-card-body {
+  padding: 24px;
+}
+
+.insight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  border-left: 4px solid #e0e0e0;
+}
+
+.insight-success {
+  background: #f0f9f4;
+  border-left-color: #28a745;
+}
+
+.insight-warning {
+  background: #fff8e1;
+  border-left-color: #ffc107;
+}
+
+.insight-icon {
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.insight-success .insight-icon {
+  color: #28a745;
+}
+
+.insight-warning .insight-icon {
+  color: #ffc107;
+}
+
+/* Icons */
+.icon-green {
+  color: #28a745;
+}
+
+.icon-blue {
+  color: #0066cc;
+}
+
+.icon-orange {
+  color: #ffc107;
+}
+
+.icon-teal {
+  color: #4ecdc4;
+}
+
+/* Progress Bars */
+.metric-card .ant-progress-line {
+  margin-top: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .performance-metrics {
+    padding: 16px;
+  }
+
+  .score-card .ant-card-body {
+    padding: 24px;
+  }
+
+  .metric-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .chart-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .insights-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .score-progress {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .performance-metrics {
+    padding: 12px;
+  }
+
+  .metrics-header {
+    margin-bottom: 16px;
+  }
+
+  .score-card .ant-card-body {
+    padding: 20px;
+  }
+
+  .metric-card .ant-card-body {
+    padding: 12px;
+  }
+
+  .metric-icon {
+    font-size: 20px;
+  }
+
+  .chart-card {
+    margin-top: 12px;
+  }
+
+  .insight-item {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .insight-icon {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .performance-metrics {
+    padding: 8px;
+  }
+
+  .score-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .metric-card .ant-card-body {
+    padding: 12px;
+  }
+
+  .metric-icon {
+    font-size: 18px;
+  }
+
+  .metric-change {
+    font-size: 13px;
+  }
+
+  .chart-card .recharts-wrapper {
+    font-size: 12px;
+  }
+
+  .insight-item {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  /* Stack header elements on mobile */
+  .metrics-header .ant-space {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .metrics-header .ant-select {
+    width: 100%;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.metric-card,
+.chart-card,
+.insights-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Tooltips */
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.recharts-default-tooltip {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Legend */
+.recharts-legend-wrapper {
+  padding-top: 16px;
+}

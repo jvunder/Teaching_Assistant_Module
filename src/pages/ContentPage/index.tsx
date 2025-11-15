@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Card,
   Table,
@@ -13,6 +13,8 @@ import {
   Tabs,
   Typography,
   message,
+  Progress,
+  List,
 } from 'antd';
 import {
   UploadOutlined,
@@ -21,11 +23,12 @@ import {
   DeleteOutlined,
   FileTextOutlined,
   PlayCircleOutlined,
+  InboxOutlined,
+  CloseCircleOutlined,
 } from '@ant-design/icons';
-// ReactQuill temporarily disabled due to React 19 compatibility issues
-// import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
 import type { ColumnsType } from 'antd/es/table';
+import uploadService, { UploadProgress } from '../../services/upload.service';
+import type { ContentAttachment } from '../../types/content.types';
 import './ContentPage.css';
 
 const { Option } = Select;
@@ -53,6 +56,12 @@ const ContentPage = () => {
   const [uploadForm] = Form.useForm();
   const [articleForm] = Form.useForm();
   const [activeTab, setActiveTab] = useState('all');
+
+  // Upload tracking
+  const [uploadingFiles, setUploadingFiles] = useState<Map<string, UploadProgress>>(new Map());
+  const [uploadedFiles, setUploadedFiles] = useState<ContentAttachment[]>([]);
+  const [dragActive, setDragActive] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     loadContents();
@@ -96,13 +105,151 @@ const ContentPage = () => {
     }
   };
 
+  /**
+   * Handle file upload with progress
+   */
+  const handleFileUpload = useCallback(async (file: File) => {
+    // Determine file type
+    let type: 'image' | 'video' | 'document';
+    if (file.type.startsWith('image/')) {
+      type = 'image';
+    } else if (file.type.startsWith('video/')) {
+      type = 'video';
+    } else if (file.type === 'application/pdf') {
+      type = 'document';
+    } else {
+      message.error('Loại file không được hỗ trợ');
+      return;
+    }
+
+    // Upload file
+    try {
+      const result = await uploadService.uploadFile(file, type, {
+        onProgress: (progress) => {
+          setUploadingFiles((prev) => new Map(prev).set(progress.fileId, progress));
+        },
+      });
+
+      if (result.success && result.url) {
+        const attachment: ContentAttachment = {
+          id: result.fileId,
+          type,
+          name: file.name,
+          url: result.url,
+          size: file.size,
+          thumbnail: result.thumbnail,
+        };
+
+        setUploadedFiles((prev) => [...prev, attachment]);
+        setUploadingFiles((prev) => {
+          const newMap = new Map(prev);
+          newMap.delete(result.fileId);
+          return newMap;
+        });
+
+        message.success(`Upload ${type === 'image' ? 'hình ảnh' : type === 'video' ? 'video' : 'file'} thành công`);
+      } else {
+        message.error(result.error || 'Upload thất bại');
+      }
+    } catch (error) {
+      message.error('Upload thất bại');
+      console.error('Upload error:', error);
+    }
+  }, []);
+
+  /**
+   * Handle multiple file upload
+   */
+  const handleMultipleFileUpload = useCallback((files: FileList | File[]) => {
+    const fileArray = Array.from(files);
+    fileArray.forEach((file) => {
+      handleFileUpload(file);
+    });
+  }, [handleFileUpload]);
+
+  /**
+   * Handle drag and drop
+   */
+  const handleDragEnter = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+  }, []);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      handleMultipleFileUpload(files);
+    }
+  }, [handleMultipleFileUpload]);
+
+  /**
+   * Handle file input change
+   */
+  const handleFileInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      handleMultipleFileUpload(files);
+    }
+    // Reset input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }, [handleMultipleFileUpload]);
+
+  /**
+   * Remove uploaded file
+   */
+  const handleRemoveFile = useCallback((fileId: string) => {
+    setUploadedFiles((prev) => prev.filter((f) => f.id !== fileId));
+  }, []);
+
+  /**
+   * Cancel uploading file
+   */
+  const handleCancelUpload = useCallback((fileId: string) => {
+    uploadService.cancelUpload(fileId);
+    setUploadingFiles((prev) => {
+      const newMap = new Map(prev);
+      newMap.delete(fileId);
+      return newMap;
+    });
+  }, []);
+
   const handleUpload = async () => {
     try {
-      // Simulate upload
+      if (uploadingFiles.size > 0) {
+        message.warning('Vui lòng đợi upload hoàn tất');
+        return;
+      }
+
+      if (uploadedFiles.length === 0) {
+        message.warning('Vui lòng upload ít nhất một file');
+        return;
+      }
+
+      // Simulate saving content
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      message.success('Upload video thành công');
+      message.success('Upload nội dung thành công');
       setShowUploadModal(false);
       uploadForm.resetFields();
+      setUploadedFiles([]);
+      setUploadingFiles(new Map());
       loadContents();
     } catch (error) {
       message.error('Upload thất bại');
@@ -249,24 +396,26 @@ const ContentPage = () => {
         />
       </Card>
 
-      {/* Upload Video Modal */}
+      {/* Upload Video Modal - Enhanced with Drag & Drop */}
       <Modal
-        title="Upload Video"
+        title="Upload Nội dung (Video, Hình ảnh, PDF)"
         open={showUploadModal}
         onCancel={() => {
           setShowUploadModal(false);
           uploadForm.resetFields();
+          setUploadedFiles([]);
+          setUploadingFiles(new Map());
         }}
         footer={null}
-        width={700}
+        width={800}
       >
         <Form form={uploadForm} layout="vertical" onFinish={handleUpload}>
           <Form.Item
             name="title"
-            label="Tiêu đề video"
+            label="Tiêu đề"
             rules={[{ required: true, message: 'Vui lòng nhập tiêu đề' }]}
           >
-            <Input placeholder="Nhập tiêu đề video" />
+            <Input placeholder="Nhập tiêu đề" />
           </Form.Item>
 
           <Form.Item
@@ -274,37 +423,146 @@ const ContentPage = () => {
             label="Mô tả"
             rules={[{ required: true, message: 'Vui lòng nhập mô tả' }]}
           >
-            <TextArea rows={4} placeholder="Nhập mô tả video" />
+            <TextArea rows={4} placeholder="Nhập mô tả" />
           </Form.Item>
 
-          <Form.Item
-            name="file"
-            label="Chọn file video"
-            rules={[{ required: true, message: 'Vui lòng chọn file' }]}
-          >
-            <Upload
-              accept="video/*"
-              maxCount={1}
-              beforeUpload={() => false}
+          {/* Drag & Drop Upload Area */}
+          <Form.Item label="Upload Files (Video, Hình ảnh, PDF)">
+            <div
+              className={`upload-drag-area ${dragActive ? 'drag-active' : ''}`}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
             >
-              <Button icon={<UploadOutlined />}>Chọn file</Button>
-            </Upload>
+              <InboxOutlined style={{ fontSize: 48, color: '#1890ff' }} />
+              <p className="upload-text">Click hoặc kéo thả file vào đây để upload</p>
+              <p className="upload-hint">
+                Hỗ trợ: Video (max 100MB), Hình ảnh (max 5MB), PDF (max 10MB)
+              </p>
+              <Button icon={<UploadOutlined />} style={{ marginTop: 16 }}>
+                Chọn Files
+              </Button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="video/*,image/*,application/pdf"
+                multiple
+                style={{ display: 'none' }}
+                onChange={handleFileInputChange}
+              />
+            </div>
           </Form.Item>
 
-          <Form.Item name="category" label="Danh mục">
+          {/* Uploading Files List */}
+          {uploadingFiles.size > 0 && (
+            <List
+              size="small"
+              header={<div><strong>Đang upload...</strong></div>}
+              bordered
+              dataSource={Array.from(uploadingFiles.values())}
+              renderItem={(item) => (
+                <List.Item
+                  actions={[
+                    <Button
+                      key="cancel"
+                      type="text"
+                      size="small"
+                      danger
+                      icon={<CloseCircleOutlined />}
+                      onClick={() => handleCancelUpload(item.fileId)}
+                    />,
+                  ]}
+                >
+                  <List.Item.Meta
+                    title={item.fileName}
+                    description={
+                      <div>
+                        <Progress percent={item.progress} size="small" status={item.status === 'error' ? 'exception' : 'active'} />
+                        <div style={{ fontSize: 12, marginTop: 4 }}>
+                          {uploadService.formatFileSize(item.uploadedBytes)} / {uploadService.formatFileSize(item.totalBytes)}
+                        </div>
+                      </div>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+          )}
+
+          {/* Uploaded Files List */}
+          {uploadedFiles.length > 0 && (
+            <List
+              size="small"
+              header={<div><strong>Files đã upload ({uploadedFiles.length})</strong></div>}
+              bordered
+              dataSource={uploadedFiles}
+              renderItem={(item) => (
+                <List.Item
+                  actions={[
+                    <Button
+                      key="remove"
+                      type="text"
+                      size="small"
+                      danger
+                      icon={<DeleteOutlined />}
+                      onClick={() => handleRemoveFile(item.id)}
+                    />,
+                  ]}
+                >
+                  <List.Item.Meta
+                    avatar={
+                      item.type === 'image' && item.thumbnail ? (
+                        <img src={item.thumbnail} alt={item.name} style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 4 }} />
+                      ) : item.type === 'video' ? (
+                        <PlayCircleOutlined style={{ fontSize: 32, color: '#722ed1' }} />
+                      ) : (
+                        <FileTextOutlined style={{ fontSize: 32, color: '#ff4d4f' }} />
+                      )
+                    }
+                    title={item.name}
+                    description={
+                      <Space>
+                        <Tag color={item.type === 'image' ? 'blue' : item.type === 'video' ? 'purple' : 'red'}>
+                          {item.type === 'image' ? 'Hình ảnh' : item.type === 'video' ? 'Video' : 'PDF'}
+                        </Tag>
+                        <span>{uploadService.formatFileSize(item.size)}</span>
+                      </Space>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+          )}
+
+          <Form.Item name="category" label="Danh mục" style={{ marginTop: 16 }}>
             <Select placeholder="Chọn danh mục">
               <Option value="math">Toán học</Option>
               <Option value="literature">Tiếng Việt</Option>
               <Option value="science">Khoa học</Option>
+              <Option value="education">Giáo dục</Option>
             </Select>
           </Form.Item>
 
           <Form.Item>
             <Space>
-              <Button type="primary" className="wow-btn" htmlType="submit">
-                Upload
+              <Button
+                type="primary"
+                className="wow-btn"
+                htmlType="submit"
+                disabled={uploadingFiles.size > 0 || uploadedFiles.length === 0}
+                loading={uploadingFiles.size > 0}
+              >
+                {uploadingFiles.size > 0 ? 'Đang upload...' : 'Lưu nội dung'}
               </Button>
-              <Button onClick={() => setShowUploadModal(false)}>Hủy</Button>
+              <Button onClick={() => {
+                setShowUploadModal(false);
+                setUploadedFiles([]);
+                setUploadingFiles(new Map());
+              }}>
+                Hủy
+              </Button>
             </Space>
           </Form.Item>
         </Form>

@@ -1,4 +1,17 @@
-// API Types
+/**
+ * Type Definitions Index
+ *
+ * Central export point for all TypeScript type definitions
+ * in the Teaching Assistant Module.
+ */
+
+// ============================================================================
+// COMMON/SHARED TYPES
+// ============================================================================
+
+/**
+ * Standard API Response wrapper
+ */
 export interface ApiResponse<T> {
   success: boolean;
   data: T;
@@ -6,7 +19,9 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
-// User Types
+/**
+ * User/Account types
+ */
 export interface User {
   id: string;
   email: string;
@@ -16,27 +31,42 @@ export interface User {
   phone?: string;
 }
 
-// Class Types
-export interface Class {
-  id: string;
-  name: string;
-  grade: string;
-  subject: string;
-  schoolId: string;
-  teacherId: string;
-  studentCount: number;
-  parentCount: number;
-}
+// ============================================================================
+// MESSAGING TYPES
+// ============================================================================
+export * from './messaging.types';
 
-// Message Types
-export interface Message {
-  id: string;
-  to: string[];
-  content: string;
-  type: 'text' | 'image' | 'video';
-  sentAt: string;
-  status: 'sent' | 'delivered' | 'read';
-}
+// ============================================================================
+// CLASS TYPES
+// ============================================================================
+export * from './class.types';
 
+// ============================================================================
+// PARENT TYPES
+// ============================================================================
+export * from './parent.types';
 
+// ============================================================================
+// CONTENT TYPES
+// ============================================================================
+export * from './content.types';
 
+// ============================================================================
+// TEACHING ASSISTANT (TA) TYPES
+// ============================================================================
+export * from './ta.types';
+
+// ============================================================================
+// LEARNER/COURSE TYPES
+// ============================================================================
+export * from './learner.types';
+
+// ============================================================================
+// ANALYTICS TYPES
+// ============================================================================
+export * from './analytics.types';
+
+// ============================================================================
+// SURVEY TYPES
+// ============================================================================
+export * from './survey.types';

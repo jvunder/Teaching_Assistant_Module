@@ -7,7 +7,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Statistic, Typography, List, Spin, Alert } from 'antd';
+import { Row, Col, Card, Statistic, Typography, Button, Space, List, Spin, Alert } from 'antd';
 import {
   BookOutlined,
   TeamOutlined,
@@ -33,7 +33,7 @@ const DashboardPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState<MockDashboard | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [, setHoveredCard] = useState<string | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   useEffect(() => {
     loadDashboardData();

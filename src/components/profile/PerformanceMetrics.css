@@ -1,0 +1,209 @@
+.performance-metrics {
+  padding: 16px 0;
+}
+
+.metrics-row {
+  margin-bottom: 16px;
+}
+
+/* Metric Cards */
+.metric-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.metric-messages::before {
+  background: linear-gradient(90deg, #0066CC, #0052A3);
+}
+
+.metric-tickets::before {
+  background: linear-gradient(90deg, #52c41a, #389e0d);
+}
+
+.metric-classes::before {
+  background: linear-gradient(90deg, #0066CC, #4ECDC4);
+}
+
+.metric-satisfaction::before {
+  background: linear-gradient(90deg, #faad14, #d48806);
+}
+
+.metric-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.metric-card .ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.metric-card .ant-statistic-content {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.metric-subtitle {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #666;
+}
+
+.metric-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666;
+}
+
+.metric-detail strong {
+  color: #1a1a1a;
+}
+
+/* Activity Score Card */
+.activity-score-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.activity-score-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.activity-icon {
+  font-size: 48px;
+  color: #FFD700;
+}
+
+.activity-score-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.activity-score-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.activity-score-value {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.score-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: #0066CC;
+}
+
+.score-total {
+  font-size: 24px;
+  color: #8c8c8c;
+}
+
+.activity-trend {
+  margin-top: 16px;
+}
+
+/* Insights Card */
+.insights-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.insights-card .ant-card-head {
+  background: linear-gradient(135deg, #0066CC 0%, #0052A3 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.insights-card .ant-card-head-title {
+  color: white;
+  font-weight: 600;
+}
+
+.insight-item {
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.insight-item:hover {
+  background: #e6f7ff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.insight-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.insight-icon {
+  font-size: 18px;
+  color: #0066CC;
+}
+
+.insight-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+.insight-detail strong {
+  color: #0066CC;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .metric-card .ant-statistic-content {
+    font-size: 24px;
+  }
+
+  .activity-icon {
+    font-size: 36px;
+  }
+
+  .score-number {
+    font-size: 36px;
+  }
+
+  .score-total {
+    font-size: 18px;
+  }
+
+  .activity-score-header h3 {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,182 @@
+.inbox-page {
+  padding: 24px;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.inbox-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.inbox-page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.inbox-page-description {
+  font-size: 16px;
+  color: #666;
+  margin: 8px 0 0 0;
+}
+
+/* Statistics Cards */
+.inbox-stats {
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.stat-new::before {
+  background: linear-gradient(90deg, #1890ff, #096dd9);
+}
+
+.stat-in-progress::before {
+  background: linear-gradient(90deg, #faad14, #d48806);
+}
+
+.stat-resolved::before {
+  background: linear-gradient(90deg, #52c41a, #389e0d);
+}
+
+.stat-closed::before {
+  background: linear-gradient(90deg, #8c8c8c, #595959);
+}
+
+.stat-card .ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.stat-card .ant-statistic-content {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.stat-card .anticon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+/* Tabs Card */
+.inbox-tabs-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+}
+
+.inbox-tabs-card .ant-tabs-nav {
+  padding: 0 24px;
+  margin-bottom: 0;
+}
+
+.inbox-tabs-card .ant-tabs-tab {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 0;
+}
+
+.inbox-tabs-card .ant-tabs-tab-active {
+  font-weight: 600;
+}
+
+.inbox-tabs-card .ant-card-body {
+  padding: 0;
+}
+
+.inbox-tabs-card .ant-tabs-content {
+  padding: 24px;
+}
+
+/* Loading State */
+.inbox-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .inbox-page {
+    padding: 16px;
+  }
+
+  .inbox-page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inbox-page-title {
+    font-size: 24px;
+  }
+
+  .inbox-page-description {
+    font-size: 14px;
+  }
+
+  .stat-card .ant-statistic-content {
+    font-size: 28px;
+  }
+
+  .inbox-tabs-card .ant-tabs-nav {
+    padding: 0 16px;
+  }
+
+  .inbox-tabs-card .ant-tabs-content {
+    padding: 16px;
+  }
+
+  .inbox-tabs-card .ant-tabs-tab {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .inbox-page {
+    padding: 12px;
+  }
+
+  .stat-card .ant-statistic-content {
+    font-size: 24px;
+  }
+
+  .inbox-tabs-card .ant-tabs-nav {
+    padding: 0 12px;
+  }
+
+  .inbox-tabs-card .ant-tabs-content {
+    padding: 12px;
+  }
+}

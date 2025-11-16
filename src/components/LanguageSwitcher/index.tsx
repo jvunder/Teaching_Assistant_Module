@@ -7,7 +7,7 @@ import './LanguageSwitcher.css';
 const { Option } = Select;
 
 const LanguageSwitcher: React.FC = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const handleChange = (value: string) => {
     console.log('Language changing to:', value);

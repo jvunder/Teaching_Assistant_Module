@@ -7,7 +7,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Statistic, Typography, Button, Space, List, Spin, Alert } from 'antd';
+import { Row, Col, Card, Statistic, Typography, List, Spin, Alert } from 'antd';
 import {
   BookOutlined,
   TeamOutlined,
@@ -33,7 +33,6 @@ const DashboardPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState<MockDashboard | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   useEffect(() => {
     loadDashboardData();
@@ -118,8 +117,6 @@ const DashboardPage: React.FC = () => {
           <Card
             className="ta-stat-card stat-card-primary"
             bordered={false}
-            onMouseEnter={() => setHoveredCard('classes')}
-            onMouseLeave={() => setHoveredCard(null)}
           >
             <div className="stat-icon-wrapper">
               <div className="stat-icon stat-icon-blue">
@@ -145,8 +142,6 @@ const DashboardPage: React.FC = () => {
           <Card
             className="ta-stat-card stat-card-success"
             bordered={false}
-            onMouseEnter={() => setHoveredCard('students')}
-            onMouseLeave={() => setHoveredCard(null)}
           >
             <div className="stat-icon-wrapper">
               <div className="stat-icon stat-icon-green">
@@ -172,8 +167,6 @@ const DashboardPage: React.FC = () => {
           <Card
             className="ta-stat-card stat-card-warning"
             bordered={false}
-            onMouseEnter={() => setHoveredCard('messages')}
-            onMouseLeave={() => setHoveredCard(null)}
           >
             <div className="stat-icon-wrapper">
               <div className="stat-icon stat-icon-orange">
@@ -199,8 +192,6 @@ const DashboardPage: React.FC = () => {
           <Card
             className="ta-stat-card stat-card-teal"
             bordered={false}
-            onMouseEnter={() => setHoveredCard('notifications')}
-            onMouseLeave={() => setHoveredCard(null)}
           >
             <div className="stat-icon-wrapper">
               <div className="stat-icon stat-icon-teal">
